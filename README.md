@@ -2,7 +2,7 @@
 
 TODO: Add a link to the deployed Heroku app for your team here, e.g.
 
-* <https://s22-7pm-3-team02.herokuapp.com>
+* <https://f22-7pm-3-team02.herokuapp.com>
 
 # Setup before running application
 
