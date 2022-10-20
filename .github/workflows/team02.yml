@@ -14,13 +14,13 @@ jobs:
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     # - name: Create Columns on team02
-      run: |
-        gh api -X POST /projects/${PROJECT_NUMBER}/columns  -H "Accept: application/vnd.github.v3+json"  -f name="Todo" 
-        gh api -X POST /projects/${PROJECT_NUMBER}/columns  -H "Accept: application/vnd.github.v3+json"  -f name="In Progress" 
-        gh api -X POST /projects/${PROJECT_NUMBER}/columns  -H "Accept: application/vnd.github.v3+json"  -f name="In Review" 
-        gh api -X POST /projects/${PROJECT_NUMBER}/columns  -H "Accept: application/vnd.github.v3+json"  -f name="Done" 
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # run: |
+    #   gh api -X POST /projects/${PROJECT_NUMBER}/columns  -H "Accept: application/vnd.github.v3+json"  -f name="Todo" 
+    #   gh api -X POST /projects/${PROJECT_NUMBER}/columns  -H "Accept: application/vnd.github.v3+json"  -f name="In Progress" 
+    #   gh api -X POST /projects/${PROJECT_NUMBER}/columns  -H "Accept: application/vnd.github.v3+json"  -f name="In Review" 
+    #   gh api -X POST /projects/${PROJECT_NUMBER}/columns  -H "Accept: application/vnd.github.v3+json"  -f name="Done" 
+    # env:
+    #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create Issue 1 From File
       id: step1
