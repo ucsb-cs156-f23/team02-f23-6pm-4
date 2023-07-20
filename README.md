@@ -1,8 +1,13 @@
 # STARTER-team02
 
+TODO: change heading above to your repo name, e.g. `# team02-m23-9am-4`
+
 TODO: Add a link to the deployed Dokku app for your team here, e.g.
 
-* <https://m23-7pm-3-team02.Dokkuapp.com>
+Deployments:
+
+* Prod: <https://team02.dokku-17.cs.ucsb.edu>
+* QA: <https://team02-qa.dokku-17.cs.ucsb.edu>
 
 # Setup before running application
 
