@@ -21,7 +21,7 @@ Create `RecommendationController`, add `GET` (index) and `POST` (create)
 - [ ] The `GET` endpoint works as expected, in the sense that the new
       records that are added show up (on localhost).
 - [ ] The `GET` and `POST` endpoints work as expected when the 
-      app is deployed to Heroku.
+      app is deployed to Dokku.
 - [ ] There is full test coverage (Jacoco) for the methods in 
       `RecommendationController.java`
 - [ ] There is full mutation test coverage (Pitest) for the methods in

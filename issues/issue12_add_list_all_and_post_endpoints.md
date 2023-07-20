@@ -21,7 +21,7 @@ Create `UCSBDiningCommonsMenuItemController`, add `GET` (index) and `POST` (crea
 - [ ] The `GET` endpoint works as expected, in the sense that the new
       records that are added show up (on localhost).
 - [ ] The `GET` and `POST` endpoints work as expected when the 
-      app is deployed to Heroku.
+      app is deployed to Dokku.
 - [ ] There is full test coverage (Jacoco) for the methods in 
       `UCSBDiningCommonsMenuItemController.java`
 - [ ] There is full mutation test coverage (Pitest) for the methods in

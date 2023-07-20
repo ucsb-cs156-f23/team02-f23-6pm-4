@@ -21,7 +21,7 @@ public class FrontendProxyController {
       if (e.getCause() instanceof ConnectException) {
         String instructions = """
                 <p>Failed to connect to the frontend server...</p>
-                <p>On Heroku, be sure that <code>PRODUCTION</code> is defined.</p>
+                <p>On Dokku, be sure that <code>PRODUCTION</code> is defined.</p>
                 <p>On localhost, open a second terminal window, cd into <code>frontend</code> and type: <code>npm install; npm start</code></p>
                 <p>Or, you may click to access: </p>
                 <ul>

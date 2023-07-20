@@ -2,12 +2,12 @@
 
 This Spring Boot application is set up to use Google OAuth as it's authentication scheme.
 
-Setting this up on localhost requires the first two steps below; getting this to work on Heroku requires an additional third step.
+Setting this up on localhost requires the first two steps below; getting this to work on Dokku requires an additional third step.
 
 1. Obtaining a Google *client id* and *client secret*, which is
    done at the [Google Developer Console](https://console.cloud.google.com/).
 2. Configuring the `.env` file with these values.
-3. Copying the `.env` values to the Heroku app's configuration values.
+3. Copying the `.env` values to the Dokku app's configuration values.
 
 Each of these three steps is explained in more detail below.
 
@@ -37,14 +37,14 @@ Each of these three steps is explained in more detail below.
    * On that page, near the top, click the button for `+ CREATE CREDENTIALS`
    * This makes a pull-down menu where you can select `OAuth Client ID`
    * For Application Type, select `Web Application`
-   * For name, choose something you will remember; I suggest using the name of your repo, or the name of the Heroku application
+   * For name, choose something you will remember; I suggest using the name of your repo, or the name of the Dokku application
    * Scroll down to the part of the page that says: `Authorized redirect URIs`
 
 3. Under `Authorized redirect URIs`, you'll need to click the `+ ADD URI` button twice to enter two addresses:
 
    * For localhost, enter: `http://localhost:8080/login/oauth2/code/google`
      - Note that this *must* be `http` not `https`
-   * For Heroku, enter: `https://myappname.herokuapp.com/login/oauth2/code/google`
+   * For Dokku, enter: `https://myappname.Dokkuapp.com/login/oauth2/code/google`
      - Note that you should substitute in *your* app name in place of `my-app-name`
      - Note that this *must* be `https` not `http`
 
@@ -89,20 +89,20 @@ ADMIN_EMAILS=phtcon@ucsb.edu,cgaucho@ucsb.edu,ldelplaya@ucsb.edu
 
 With this done, you should be all set to run on localhost.
 
-For Heroku, there is one more step.
+For Dokku, there is one more step.
 
-## Step 3: Copying `.env` values to Heroku
+## Step 3: Copying `.env` values to Dokku
 
-The easy way, using the Heroku CLI:
+The easy way, using the Dokku CLI:
 
-(Note: if you don't access to the Heroku CLI, scroll down to "the tedious way")
+(Note: if you don't access to the Dokku CLI, scroll down to "the tedious way")
 
-1.  Make sure you have the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed.
-2.  Login with `heroku login`
-3.  Use this command, with the name of your app in place of `my-heroku-app`
+1.  Make sure you have the [Dokku CLI](https://devcenter.Dokku.com/articles/Dokku-cli#download-and-install) installed.
+2.  Login with `Dokku login`
+3.  Use this command, with the name of your app in place of `my-Dokku-app`
 
     ```
-    heroku config:set --app my-heroku-app  `cat .env` 
+    Dokku config:set --app my-Dokku-app  `cat .env` 
     ```
 
     You should get output like this:
@@ -112,7 +112,7 @@ The easy way, using the Heroku CLI:
     ```
 
     You can check the values by visiting the `Settings` tab 
-    in the Heroku Dashboard, and clicking `Reveal Config Vars`
+    in the Dokku Dashboard, and clicking `Reveal Config Vars`
 
     If the command fails with the following error:
 
@@ -124,7 +124,7 @@ The easy way, using the Heroku CLI:
 
 The slightly more tedious way: 
 
-1. In the Heroku Dashboard, visit the `Settings` tab 
+1. In the Dokku Dashboard, visit the `Settings` tab 
    then click `Reveal Config Vars`.
 2. For each variable in `.env`, create a Config Var entry
    with the corresponding name and value.  
@@ -154,9 +154,9 @@ For example, when I was getting this error message, it's because I put in this f
 
 ![image](https://user-images.githubusercontent.com/1119017/149856340-98acd5e4-8712-4723-a899-e3bf2f06d3fa.png)
 
-Rookie mistake!  I literally had `my-heroku-app` instead of `demo-spring-react-example`. 
+Rookie mistake!  I literally had `my-Dokku-app` instead of `demo-spring-react-example`. 
 
-Change it to the correct URI, click save.  Then go back to the URL for the home page of your app and refresh the page (you don't need to restart the Heroku backend; just refresh your browser page.)  Click login again, and you should get something like this:
+Change it to the correct URI, click save.  Then go back to the URL for the home page of your app and refresh the page (you don't need to restart the Dokku backend; just refresh your browser page.)  Click login again, and you should get something like this:
 
 
 <img src="https://user-images.githubusercontent.com/1119017/149856532-b1cda813-bd3f-4fd1-a79e-630e5929d7be.png" alt="Choose an Account" width="600" />

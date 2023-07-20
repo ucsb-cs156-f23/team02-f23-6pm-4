@@ -17,7 +17,7 @@ JSON representation of the new item to the backend.
 - [ ] The Swagger-UI endpoints for this endpoint is well documented
       so that any member of the team can understand how to use it.
 - [ ] The endpoint works as expected on localhost.
-- [ ] The endpoint works as expected when deployed to Heroku.
+- [ ] The endpoint works as expected when deployed to Dokku.
 - [ ] There is full test coverage (Jacoco) for the new code in 
       `HelpRequestController.java`
 - [ ] There is full mutation test coverage (Pitest) for new code in

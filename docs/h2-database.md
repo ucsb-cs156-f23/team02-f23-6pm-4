@@ -40,7 +40,7 @@ spring.datasource.password=password`
 ```
 
 Note that the value `password` for a password is of course a terrible choice; but keep in mind that this is only for localhost testing, 
-which is by definition not avaiable on the public internet, so security here is not a primary concern.  When deploying on Heroku, an entirely
+which is by definition not avaiable on the public internet, so security here is not a primary concern.  When deploying on Dokku, an entirely
 different database system and password management system is in place.
 
 Once you enter the username and password and press Connect, you may see a warning like this about the password `password`, which is probably fine to ignore.
