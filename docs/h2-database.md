@@ -17,8 +17,6 @@ This is both good and bad; the key thing is to be aware of this.
 
 # The H2 Console
 
-* On localhost only: <http://localhost:8080/h2-console>  
-
 It isn't necessarily a course goal for you to become fully proficient in SQL (Structured Query Language, the language used to manipulate databases.)
 
 But a little SQL can go a long way, and it can sometimes be helpful to peek under the hood at the database to see what's going on.
@@ -40,7 +38,7 @@ spring.datasource.password=password`
 ```
 
 Note that the value `password` for a password is of course a terrible choice; but keep in mind that this is only for localhost testing, 
-which is by definition not avaiable on the public internet, so security here is not a primary concern.  When deploying on Dokku, an entirely
+which is by definition not avaiable on the public internet, so security here is not a primary concern.  When deploying on Heroku, an entirely
 different database system and password management system is in place.
 
 Once you enter the username and password and press Connect, you may see a warning like this about the password `password`, which is probably fine to ignore.
