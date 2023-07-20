@@ -1,5 +1,7 @@
 # STARTER-team02
 
+Instructions: <https://ucsb-cs156.github.io/m23/lab/team02.html>
+
 TODO: change heading above to your repo name, e.g. `# team02-m23-9am-4`
 
 TODO: Add a link to the deployed Dokku app for your team here, e.g.
@@ -45,22 +47,7 @@ Failed to connect to the frontend server... On Dokku, be sure that PRODUCTION is
 
 # Getting Started on Dokku
 
-On Dokku, you'll need to set the following configuration variable:
-
-* Using the Dokku CLI:
-  ```
-  Dokku config:set PRODUCTION=true --app <Dokku app name>
-  ```
-* Or set it on the Dokku Dashboard:
-  ![image](https://user-images.githubusercontent.com/1119017/149855768-7b56164a-98f7-4357-b877-da34b7bd9ea4.png)
-
-You'll also need to follow the OAuth set up instructions here: [`docs/oauth.md`](docs/oauth.md).
-
-If you get the following message on Dokku, it probably means that you failed to setup the `PRODUCTION` environment variable.
-
-```
-Failed to connect to the frontend server... On Dokku, be sure that PRODUCTION is defined.  On localhost, open a second terminal window, cd into frontend and type: npm install; npm start";
-```
+See: [/docs/dokku.md](/docs/dokku.md)
 
 # Accessing swagger
 
@@ -68,6 +55,7 @@ To access the swagger API endpoints, use:
 
 * <http://localhost:8080/swagger-ui/index.html>
 
+Or add `/swagger-ui/index.html` to the URL of your dokku deployment.
 
 # To run React Storybook
 
@@ -86,7 +74,5 @@ On localhost:
 * You can access the database console via a special route, <http://localhost:8080/h2-console>
 * For more info, see [docs/h2-database.md](/docs/h2-database.md)
 
-On Dokku:
-* The SQL database is a postgres database provisioned automatically by Dokku
-* You can reset it with `Dokku pg:reset --app app-name-goes-here`
-* More info and instructions for access the SQL prompt are at [docs/postgres-database.md](/docs/postgres-database.md)
+On Dokku, follow instructions for Dokku databases:
+* <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html>
