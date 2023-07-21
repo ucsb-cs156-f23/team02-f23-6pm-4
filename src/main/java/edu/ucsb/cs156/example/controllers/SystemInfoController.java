@@ -20,7 +20,6 @@ public class SystemInfoController extends ApiController {
     private SystemInfoService systemInfoService;
 
     @Operation(summary= "Get global information about the application")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("")
     public SystemInfo getSystemInfo() {
         return systemInfoService.getSystemInfo();

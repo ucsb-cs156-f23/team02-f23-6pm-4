@@ -2,15 +2,12 @@ package edu.ucsb.cs156.example.testconfig;
 
 import edu.ucsb.cs156.example.entities.User;
 import edu.ucsb.cs156.example.services.CurrentUserServiceImpl;
-import lombok.extern.slf4j.Slf4j;
-
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
-
 
 @Service("currentUser")
 public class MockCurrentUserServiceImpl extends CurrentUserServiceImpl {
