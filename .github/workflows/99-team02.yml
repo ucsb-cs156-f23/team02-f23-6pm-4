@@ -13,6 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      - name: Set up GitHub Pages
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ github.token }}
+          title: Set up Github Pages
+          body: |
+            # Acceptance Criteria:
+            - [ ] Github Pages is active, using the `gh-pages` branch and the root directory
+            - [ ] The main page of the repo has a link to the Github Pages site in the right side bar
+            - [ ] The links on the Github Pages site work properly.
+
+            # Details
+
+            See the file /docs/github-pages.md in the repo for details
+      
       - name: Set up Team prod deployment
         uses: dacbd/create-issue-action@main
         with:
