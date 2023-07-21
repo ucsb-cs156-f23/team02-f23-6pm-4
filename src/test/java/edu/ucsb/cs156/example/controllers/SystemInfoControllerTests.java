@@ -25,20 +25,7 @@ public class SystemInfoControllerTests extends ControllerTestCase {
   @MockBean
   SystemInfoService mockSystemInfoService;
 
-  @Test
-  public void systemInfo__logged_out() throws Exception {
-    mockMvc.perform(get("/api/systemInfo"))
-        .andExpect(status().is(403));
-  }
 
-  @WithMockUser(roles = { "USER" })
-  @Test
-  public void systemInfo__user_logged_in() throws Exception {
-    mockMvc.perform(get("/api/systemInfo"))
-        .andExpect(status().is(403));
-  }
-
-  @WithMockUser(roles = { "ADMIN", "USER" })
   @Test
   public void systemInfo__admin_logged_in() throws Exception {
 

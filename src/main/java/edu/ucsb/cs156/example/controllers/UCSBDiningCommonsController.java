@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 
 @Tag(name = "UCSBDiningCommons")
 @RequestMapping("/api/ucsbdiningcommons")
@@ -32,7 +32,7 @@ public class UCSBDiningCommonsController extends ApiController {
     UCSBDiningCommonsRepository ucsbDiningCommonsRepository;
 
     @Operation(summary= "List all ucsb dining commons")
-    // @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public Iterable<UCSBDiningCommons> allCommonss() {
         Iterable<UCSBDiningCommons> commons = ucsbDiningCommonsRepository.findAll();
