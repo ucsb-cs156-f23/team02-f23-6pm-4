@@ -149,8 +149,8 @@ jobs:
                   using the H2 console (see the file `docs/h2-database.md` for 
                   instructions.)
             - [ ] When you deploy the app to Dokku, you can see the table
-                  using the psql command (See `Accessing Database Console` in the
-                  main `README.md` file for instructions.)
+                  using the `dokku postgres:connect team02-db` command
+                  (use `\dt` to list the tables)
           
 
       - name: Create Controller, add GET (index) and POST (create)
@@ -294,28 +294,3 @@ jobs:
             
             
           
-
-
-
-
-      - name: 
-        uses: dacbd/create-issue-action@main
-        env:
-          name: ${{ matrix.api }}
-        with:
-          token: ${{ github.token }}
-          title: 
-
-          body: |
-            
-
-
-      - name: 
-        uses: dacbd/create-issue-action@main
-        env:
-          name: ${{ matrix.api }}
-        with:
-          token: ${{ github.token }}
-          title: 
-
-          body: |
