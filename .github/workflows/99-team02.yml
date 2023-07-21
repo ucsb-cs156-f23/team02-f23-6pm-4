@@ -21,10 +21,14 @@ jobs:
           body: |
             # Acceptance Criteria:
             - [ ] An app named `team02` is created on this team's dokku server.
-            - [ ] An database is configured for that app.
-            - [ ] HTTPS is configured for that app.
+            - [ ] An database is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html>)
+            - [ ] HTTPS is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/enabling_https.html>)
             - [ ] The ADMIN_EMAILS are configured for that app.
+                  * You should find the ones you need in a pinned post on your team's Slack channel.
+                  * Instructions for configuring the variable are here: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] Google OAuth is configured for that app.
+                  * Instructions for configuring OAuth credentials are here: <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
+                  * Then you need to use the instructions here to configure the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] The main branch is deployed on Dokku at, for example,
                   <https://team02.dokku-xx.cs.ucsb.edu> (substituting your
                   own Dokku instances for xx).
@@ -44,12 +48,15 @@ jobs:
           body: |
             # Acceptance Criteria:
 
-                # Acceptance Criteria:
             - [ ] An app named `team02-qa` is created on this team's dokku server.
-            - [ ] An database is configured for that app.
-            - [ ] HTTPS is configured for that app.
+            - [ ] An database is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html>)
+            - [ ] HTTPS is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/enabling_https.html>)
             - [ ] The ADMIN_EMAILS are configured for that app.
+                  * You should find the ones you need in a pinned post on your team's Slack channel.
+                  * Instructions for configuring the variable are here: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] Google OAuth is configured for that app.
+                  * Instructions for configuring OAuth credentials are here: <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
+                  * Then you need to use the instructions here to configure the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] The main branch is deployed on Dokku at, for example,
                   <https://team02-qa.dokku-xx.cs.ucsb.edu> (substituting your
                   own Dokku instances for xx).
@@ -72,10 +79,10 @@ jobs:
         uses: dacbd/create-issue-action@main
         with:
           token: ${{ github.token }}
-          title: Adjust links in README.md
+          title: Adjust title and links in README.md
           body: |
             ## Acceptance criteria
-             
+            - [ ] The title of the README.md file is changed from `STARTER-team02` to the name of the app (e.g. `team02-m23-9am-4`)
             - [ ] The README.md file is updated with links to the prod and qa instances on dokku.
             - [ ] The README.md file is updated with any other links as specified in the instructions.
             
