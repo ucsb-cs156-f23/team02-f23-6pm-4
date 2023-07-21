@@ -3,9 +3,10 @@ package edu.ucsb.cs156.example.controllers;
 import edu.ucsb.cs156.example.entities.UCSBDiningCommons;
 import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.UCSBDiningCommonsRepository;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
-
-@Api(description = "UCSBDiningCommons")
+@Tag(name = "UCSBDiningCommons")
 @RequestMapping("/api/ucsbdiningcommons")
 @RestController
 @Slf4j
@@ -31,36 +31,36 @@ public class UCSBDiningCommonsController extends ApiController {
     @Autowired
     UCSBDiningCommonsRepository ucsbDiningCommonsRepository;
 
-    @ApiOperation(value = "List all ucsb dining commons")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @Operation(summary= "List all ucsb dining commons")
+    // @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public Iterable<UCSBDiningCommons> allCommonss() {
         Iterable<UCSBDiningCommons> commons = ucsbDiningCommonsRepository.findAll();
         return commons;
     }
 
-    @ApiOperation(value = "Get a single commons")
+    @Operation(summary= "Get a single commons")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public UCSBDiningCommons getById(
-            @ApiParam("code") @RequestParam String code) {
+            @Parameter(name="code") @RequestParam String code) {
         UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)
                 .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommons.class, code));
 
         return commons;
     }
 
-    @ApiOperation(value = "Create a new commons")
+    @Operation(summary= "Create a new commons")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public UCSBDiningCommons postCommons(
-        @ApiParam("code") @RequestParam String code,
-        @ApiParam("name") @RequestParam String name,
-        @ApiParam("hasSackMeal") @RequestParam boolean hasSackMeal,
-        @ApiParam("hasTakeOutMeal") @RequestParam boolean hasTakeOutMeal,
-        @ApiParam("hasDiningCam") @RequestParam boolean hasDiningCam,
-        @ApiParam("latitude") @RequestParam double latitude,
-        @ApiParam("longitude") @RequestParam double longitude
+        @Parameter(name="code") @RequestParam String code,
+        @Parameter(name="name") @RequestParam String name,
+        @Parameter(name="hasSackMeal") @RequestParam boolean hasSackMeal,
+        @Parameter(name="hasTakeOutMeal") @RequestParam boolean hasTakeOutMeal,
+        @Parameter(name="hasDiningCam") @RequestParam boolean hasDiningCam,
+        @Parameter(name="latitude") @RequestParam double latitude,
+        @Parameter(name="longitude") @RequestParam double longitude
         )
         {
 
@@ -78,11 +78,11 @@ public class UCSBDiningCommonsController extends ApiController {
         return savedCommons;
     }
 
-    @ApiOperation(value = "Delete a UCSBDiningCommons")
+    @Operation(summary= "Delete a UCSBDiningCommons")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
     public Object deleteCommons(
-            @ApiParam("code") @RequestParam String code) {
+            @Parameter(name="code") @RequestParam String code) {
         UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)
                 .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommons.class, code));
 
@@ -90,11 +90,11 @@ public class UCSBDiningCommonsController extends ApiController {
         return genericMessage("UCSBDiningCommons with id %s deleted".formatted(code));
     }
 
-    @ApiOperation(value = "Update a single commons")
+    @Operation(summary= "Update a single commons")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
     public UCSBDiningCommons updateCommons(
-            @ApiParam("code") @RequestParam String code,
+            @Parameter(name="code") @RequestParam String code,
             @RequestBody @Valid UCSBDiningCommons incoming) {
 
         UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)

@@ -47,22 +47,41 @@
 
   <properties>
     <java.version>17</java.version>
-    <mainClass>edu.ucsb.cs156.spring.backenddemo.Application</mainClass>
+    <mainClass>edu.ucsb.cs156.example.ExampleApplication</mainClass>
+    <app.package>edu.ucsb.cs156.example</app.package>
+    <app.packagePath>edu/ucsb/cs156/example</app.packagePath>
   </properties>
 
   <!-- (22) <dependencyManagement/> -->
   <!-- (23) <dependencies/> -->
-
   <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-oauth2-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-gateway-mvc</artifactId>
+      <version>4.0.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>me.paulschwarz</groupId>
+      <artifactId>spring-dotenv</artifactId>
+      <version>2.4.1</version>
     </dependency>
 
     <dependency>
@@ -70,20 +89,52 @@
       <artifactId>lombok</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
 
-    <!-- https://springdoc.org/ -->
+    <!-- <dependency>
+      <groupId>jidation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>2.0.1.Final</version>
+    </dependency> -->
+
+    <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>3.0.2</version>
+    </dependency>  <!-- https://springdoc.org/ -->
+
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
       <version>2.1.0</version>
-   </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
-    <dependency>
-      <groupId>com.opencsv</groupId>
-      <artifactId>opencsv</artifactId>
-      <version>5.4</version>
     </dependency>
+
   </dependencies>
 
   <!-- (24) <repositories/> -->
@@ -117,10 +168,21 @@
       </plugin>
 
 
+      <!-- Test case coverage report -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.7</version>
+        <configuration>
+          <excludes>
+            <exclude>**/${app.packagePath}/aop/LoggingAspect.*</exclude>
+            <exclude>**/${app.packagePath}/config/*</exclude>
+            <exclude>**/${app.packagePath}/controllers/FrontendController.*</exclude>
+            <exclude>**/${app.packagePath}/controllers/FrontendProxyController.*</exclude>
+            <exclude>**/${app.packagePath}/services/CurrentUserServiceImpl.*</exclude>
+            <exclude>**/${app.packagePath}/ExampleApplication.*</exclude>
+          </excludes>
+        </configuration>
         <executions>
           <execution>
             <goals>
@@ -134,8 +196,44 @@
               <goal>report</goal>
             </goals>
           </execution>
+          <execution>
+            <id>check</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule implementation="org.jacoco.maven.RuleConfiguration">
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit implementation="org.jacoco.report.check.Limit">
+                      <counter>INSTRUCTION</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>1.00</minimum>
+                    </limit>
+                    <limit implementation="org.jacoco.report.check.Limit">
+                      <counter>BRANCH</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>1.00</minimum>
+                    </limit>
+                    <limit implementation="org.jacoco.report.check.Limit">
+                      <counter>LINE</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>1.00</minimum>
+                    </limit>
+                    <limit implementation="org.jacoco.report.check.Limit">
+                      <counter>CLASS</counter>
+                      <value>MISSEDCOUNT</value>
+                      <maximum>0</maximum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
+
 
       <plugin>
         <groupId>org.pitest</groupId>
@@ -149,6 +247,12 @@
           </dependency>
         </dependencies>
         <configuration>
+          <historyInputFile>
+            target/pit-history/history.bin
+          </historyInputFile>
+          <historyOutputFile>
+            target/pit-history/history.bin
+          </historyOutputFile>
           <verbose>true</verbose>
           <targetClasses>
             <param>edu.ucsb.cs156.*</param>
@@ -157,11 +261,14 @@
             <param>edu.ucsb.cs156.*</param>
           </targetTests>
           <excludedClasses>
-            <param>edu.ucsb.cs156.spring.backenddemo.config.OpenAPIConfig</param>
+            <param>${app.package}.aop.LoggingAspect</param>
+            <param>${app.package}.controllers.FrontendController</param>
+            <param>${app.package}.controllers.FrontendProxyController</param>
+            <param>${app.package}.services.CurrentUserServiceImpl</param>
+            <param>${app.package}.ExampleApplication</param>
+            <param>${app.package}.config.SecurityConfig</param>
           </excludedClasses>
-          <excludedTestClasses>
-            <param>edu.ucsb.cs156.spring.backenddemo.ApplicationTests</param>
-          </excludedTestClasses>
+          <excludedTestClasses></excludedTestClasses>
           <outputFormats>
             <outputFormat>HTML</outputFormat>
             <outputFormat>CSV</outputFormat>
@@ -172,6 +279,8 @@
             <avoidCallsTo>org.apache.log4j</avoidCallsTo>
             <avoidCallsTo>org.slf4j</avoidCallsTo>
             <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
+            <avoidCallsTo>java.lang.Exception</avoidCallsTo>
+            <avoidCallsTo>org.springframework.security.core.context.SecurityContextHolder</avoidCallsTo>
           </avoidCallsTo>
           <timestampedReports>false</timestampedReports>
         </configuration>
@@ -190,5 +299,105 @@
 
   <!-- (27) <reporting/> -->
   <!-- (28) <profiles/> -->
+
+  <profiles>
+    <profile>
+      <id>localhost</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <springProfiles>development</springProfiles>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>production</id>
+      <activation>
+        <property>
+          <name>env.PRODUCTION</name>
+        </property>
+      </activation>
+      <properties>
+        <springProfiles>production</springProfiles>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.12.1</version>
+            <configuration>
+              <workingDirectory>frontend</workingDirectory>
+              <installDirectory>${project.build.directory}</installDirectory>
+            </configuration>
+            <executions>
+              <execution>
+                <id>install node and npm</id>
+                <goals>
+                  <goal>install-node-and-npm</goal>
+                </goals>
+                <configuration>
+                  <nodeVersion>v12.12.0</nodeVersion>
+                  <npmVersion>6.14.3</npmVersion>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm install</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>ci</arguments>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm run build</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <configuration>
+                  <arguments>run build</arguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <phase>generate-resources</phase>
+                <configuration>
+                  <target>
+                    <copy todir="${project.build.outputDirectory}/public">
+                      <fileset dir="${project.basedir}/frontend/build" />
+                    </copy>
+                  </target>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 
 </project>

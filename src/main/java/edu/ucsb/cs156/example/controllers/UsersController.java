@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.ucsb.cs156.example.entities.User;
 import edu.ucsb.cs156.example.repositories.UserRepository;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Api(description="User information (admin only)")
+
+@Tag(name="User information (admin only)")
 @RequestMapping("/api/admin/users")
 @RestController
 public class UsersController extends ApiController {
@@ -25,7 +26,7 @@ public class UsersController extends ApiController {
     @Autowired
     ObjectMapper mapper;
 
-    @ApiOperation(value = "Get a list of all users")
+    @Operation(summary= "Get a list of all users")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("")
     public ResponseEntity<String> users()
