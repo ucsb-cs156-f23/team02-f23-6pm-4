@@ -27,8 +27,8 @@ public class CurrentUserServiceImpl extends CurrentUserService {
   @Autowired
   private UserRepository userRepository;
 
-  // @Autowired
-  // GrantedAuthoritiesService grantedAuthoritiesService;
+  @Autowired
+  GrantedAuthoritiesService grantedAuthoritiesService;
 
   @Value("${app.admin.emails}")
   final private List<String> adminEmails = new ArrayList<String>();
@@ -95,7 +95,6 @@ public class CurrentUserServiceImpl extends CurrentUserService {
   }
 
   public Collection<? extends GrantedAuthority> getRoles() {
-   // return grantedAuthoritiesService.getGrantedAuthorities();
-   return new ArrayList<GrantedAuthority>();
+   return grantedAuthoritiesService.getGrantedAuthorities();
   }
 }

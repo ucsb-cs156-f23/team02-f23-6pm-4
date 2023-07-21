@@ -31,6 +31,8 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+
+
 import edu.ucsb.cs156.example.entities.User;
 import edu.ucsb.cs156.example.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -70,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private GrantedAuthoritiesMapper userAuthoritiesMapper() {
     return (authorities) -> {
       Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
+      log.info("********** authorities={}", authorities);
 
       authorities.forEach(authority -> {
         log.info("********** authority={}", authority);
@@ -91,6 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         }
 
       });
+      log.info("********** mappedAuthorities={}", mappedAuthorities);
       return mappedAuthorities;
     };
   }
