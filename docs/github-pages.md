@@ -15,17 +15,27 @@ following the instructions below should take care of that.
 # Steps to setup Github Pages for this repo
 
 1. Enable Github Pages on the repo settings as shown below.
-   * Select `Settings`, then `Pages`, then change `Source` to `Github Actions`
+
+   Select `Settings`, then `Pages`, then change:
+   * `Source` to `Deploy from a branch`
+   * `Branch` to `gh-pages`
+   * `Select Folder` should show `/ (root)`
+  
+   As shown here:
    
-   ![enable-gh-pages-workflow](https://user-images.githubusercontent.com/1119017/235544870-58cc4dfe-b23e-4718-a23a-ef335f4fce2a.gif)
+   <img width="606" alt="image" src="https://github.com/ucsb-cs156-m23/STARTER-jpa03/assets/1119017/4b762858-0b2d-42ad-a778-94680c50015a">
 
+   If `gh-pages` is not an option, then perform the next step where you launch workflow `02-gh-pages-rebuild` first, then try this step again.
 
-2. Go to the `Actions` menu, and launch workflow `02-gh-pages-rebuild` as shown. This may take a few minutes to run.
+3. Go to the `Actions` menu, and launch workflow `02-gh-pages-rebuild-part-1` as shown. You
+   * select the job in the left hand navigation,
+   * click on right where it says 'Run workflow'
+   * then select `main` branch and click the green `Run Workflow` button
+   
+   <img width="1307" alt="Run Workflow: 02-gh-pages-rebuild-part-1" src="https://github.com/ucsb-cs156-m23/STARTER-jpa03/assets/1119017/fb506c1f-dc95-4e33-9cfa-f91324705c87">
+
    It will create the Github Pages site for the repo, with links to documentation for both the backend (javadoc) and
    frontend (storybook).
-   
-   ![run-workflow-02](https://user-images.githubusercontent.com/1119017/235545108-e6da1791-5a29-44e9-a8f8-ff4e7a6b889b.gif)
-
   
 3. Return to the main page for the repo,  click on the gear at right, and click the box for Github Pages, as shown below
    
