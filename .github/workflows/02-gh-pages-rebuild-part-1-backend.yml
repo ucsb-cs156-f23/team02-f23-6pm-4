@@ -134,8 +134,6 @@ jobs:
 
     - name: Build with Maven
       continue-on-error: true
-      env:
-        TEST_PROPERTIES: ${{ secrets.TEST_PROPERTIES }}
       run: mvn test pitest:mutationCoverage -DmutationThreshold=100 
 
     - name: Upload Pitest History to Artifacts
