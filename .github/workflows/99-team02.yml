@@ -1,7 +1,7 @@
 name: 99 - Create Issues for team02
 
 env:
-  ASN_LINK: https://ucsb-cs156.github.io/m23/lab/team02
+  ASN_LINK: https://ucsb-cs156.github.io/f23/lab/team02
 
 on:
   workflow_dispatch:
@@ -13,6 +13,28 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      - name: Add table to README.md
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ github.token }}
+          title: Add table to README.md
+          body: |
+            # Acceptance Criteria:
+            - [ ] The README.md has a table at the top like the one shown below
+                  indicating which team member is initially taking on
+                  which database table, and which is unassigned.
+                  
+                  ```
+                  | Table                       | Team Member  | Github Id     |
+                  |-----------------------------|--------------|---------------|
+                  | `UCSBDiningCommonsMenuItem` | Alice        | alice33       |
+                  | `UCSBOrganization`          | (unassigned) |               |
+                  | `RecommendationRequest`     | Bob          | robertg       |
+                  | `MenuItemReview`            | Charlie      | gauchocharlie |
+                  | `HelpRequest`               | Danielle     | danielle      |
+                  | `Articles`                  | Eddie        | eddydp        |
+                  ```
+
       - name: Set up GitHub Pages
         uses: dacbd/create-issue-action@main
         with:
@@ -97,7 +119,7 @@ jobs:
           title: Adjust title and links in README.md
           body: |
             ## Acceptance criteria
-            - [ ] The title of the README.md file is changed from `STARTER-team02` to the name of the app (e.g. `team02-m23-9am-4`)
+            - [ ] The title of the README.md file is changed from `STARTER-team02` to the name of the app (e.g. `team02-f23-6pm-4`)
             - [ ] The README.md file is updated with links to the prod and qa instances on dokku.
             - [ ] The README.md file is updated with any other links as specified in the instructions.
             
@@ -132,6 +154,25 @@ jobs:
     
       - uses: actions/checkout@v3
 
+      - name: Create personal dokku dev deployment
+        uses: dacbd/create-issue-action@main
+        env:
+          name: ${{ matrix.api }}
+        with:
+          token: ${{ github.token }}
+          title: Create personal dokku dev deployment
+          body: |
+
+            # Acceptance Criteria:
+            - [ ] An app named `team02-YOURGITHUBID-dev` is created on this team's dokku server, where
+                  `YOURGITHUBID` is your github id.
+            - [ ] The app is configured for a database (see: <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html>)
+            - [ ] The app is configured for HTTPS (see: <https://ucsb-cs156.github.io/topics/dokku/enabling_https.html>)
+            - [ ] The app is configured for OAuth (see: `docs/oauth.md`)
+            - [ ] The `APP_ADMIN_EMAILS` are configured (see: `docs/environment-variables.md`)
+            - [ ] Initially, the `main` branch is deployed and works properly (later, you will deploy your own branches to this 
+                  instance as you test them before merging.)
+                        
       - name: Create database table
         uses: dacbd/create-issue-action@main
         env:
