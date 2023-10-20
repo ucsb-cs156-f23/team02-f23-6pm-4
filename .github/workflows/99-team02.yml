@@ -223,7 +223,31 @@ jobs:
           title: Create `${{env.name}}Controller`, add `GET` (index) and `POST` (create)
 
           body: |
-           
+
+
+              # Overview
+
+              In this issue, you'll create a *Controller*.  In the Spring web framework, a Controller is a file that maps request URLs (e.g. `/api/UCSBDiningCommonsMenuItem/all` to some code that runs to produces the response to that request.
+              
+              First locate the directory where the Java source code files for controllers can be found:
+              
+              * [`src/main/java/edu/ucsb/cs156/example/controllers`](https://github.com/ucsb-cs156-f23/STARTER-team02/tree/main/src/main/java/edu/ucsb/cs156/example/controllers).   
+              
+              Then, determine which example file you are going to use as a basis for your controller by reading the team02 instructions about the `@Id` field here: <https://github.com/ucsb-cs156/f23/blob/main/lab/team02.md#two-types-of-id-values-for-an-entity>
+              
+              The two candidates are:
+              * `UCSBDatesController.java` (if your database table a numeric `@Id` field)
+              * `UCSBDiningCommonsController.java` (if your database table uses a string field as it's `@Id` field)
+              
+              For this issue, you'll want to create a similar for your database table, but at this stage, include ONLY the first two Java methods, i.e. the ones with these annotations:
+              
+              | Annotation | Purpose |
+              |-|-|
+              |`@GetMapping("/all")` | Get all records in the table and return as a JSON array |
+              | `@PostMapping("/post")` | Use the data in the input parameters to create a new row in the table and return the data as JSON |
+              
+              Copy over these two methods, then edit the names of the fields, etc. to match your database table.
+              
 
               # Acceptance Criteria:
 
