@@ -160,9 +160,13 @@ jobs:
           name: ${{ matrix.api }}
         with:
           token: ${{ github.token }}
-          title: Create personal dokku dev deployment
+          title: "${{env.name}} - Create personal dokku dev deployment"
           body: |
 
+            The team member that takes on ${{env.name}} as their database table
+            should use this issue to track creating their personal dokku
+            deployment.
+            
             # Acceptance Criteria:
             - [ ] An app named `team02-YOURGITHUBID-dev` is created on this team's dokku server, where
                   `YOURGITHUBID` is your github id.
