@@ -134,8 +134,16 @@ jobs:
           token: ${{ github.token }}
           title:  Submit for Grading
           body: |
+
+            This issue should be the very *last* one that the team drags into the "done" column;
+            it signifies that the sprint is complete, and that the project is ready for the
+            staff to review it for a grade.
+
             ## Acceptance criteria
-            
+  
+            - [ ] All PRs have been code reviewed and merged to main
+            - [ ] All issues are in the done column 
+            - [ ] The `main` branch (after all PRs merged) has been reployed to the dokku instance with the <tt>dokku git:sync team02 <i>url</i> main</tt> and `dokku ps:rebuild team02 ` commands
             - [ ] The assignment has been submitted on Canvas
             
             ## Details
