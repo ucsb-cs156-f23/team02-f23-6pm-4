@@ -171,6 +171,12 @@ jobs:
           title: "${{env.name}} - Create personal dokku dev deployment"
           body: |
 
+            # Dependencies
+
+            None: The team member that takes on ${{env.name}} should start with this issue.
+
+            # Overview
+
             The team member that takes on ${{env.name}} as their database table
             should use this issue to track creating their personal dokku
             deployment.
@@ -191,7 +197,10 @@ jobs:
                   are all able to login with OAuth and see that they have
                   admin privileges.
             - [ ] Initially, the `main` branch is deployed and works properly (later, you will deploy your own branches to this 
-                  instance as you test them before merging.)           
+                  instance as you test them before merging.)     
+            # Next issue
+
+            Next, work on "Create database table for ${{env.name}}"
                         
       - name: Create database table
         uses: dacbd/create-issue-action@main
@@ -201,6 +210,10 @@ jobs:
           token: ${{ github.token }}
           title: Create database table for ${{env.name}}
           body: |
+
+            # Dependencies
+
+            This issue should be completed *after* the issue "${{env.name}} - Create personal dokku dev deployment"
 
             # Acceptance Criteria:
             
@@ -213,6 +226,9 @@ jobs:
                   using the `dokku postgres:connect team02-db` command
                   (use `\dt` to list the tables) (See <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html#postgres-command-line> for more info.)
           
+            # Next issue
+
+            Next, work on "Create `${{env.name}}Controller..."
 
       - name: Create Controller, add GET (index) and POST (create)
         uses: dacbd/create-issue-action@main
@@ -224,30 +240,75 @@ jobs:
 
           body: |
 
+              # Dependencies
+
+              This issue should be completed *after* the issue with the title "Create database table for ${{env.name}}"
 
               # Overview
 
-              In this issue, you'll create a *Controller*.  In the Spring web framework, a Controller is a file that maps request URLs (e.g. `/api/UCSBDiningCommonsMenuItem/all` to some code that runs to produces the response to that request.
+              In this issue, you'll create a *Controller*.  In the Spring web framework, a Controller is a file that maps request URLs (e.g. `/api/${{env.name}}/all` to some code that runs to produces the response to that request.
               
-              First locate the directory where the Java source code files for controllers can be found:
+              (1) First locate the directory where the Java source code files for controllers can be found:
               
-              * [`src/main/java/edu/ucsb/cs156/example/controllers`](https://github.com/ucsb-cs156-f23/STARTER-team02/tree/main/src/main/java/edu/ucsb/cs156/example/controllers).   
+              * [`src/main/java/edu/ucsb/cs156/example/controllers`](https://github.com/ucsb-cs156-f23/STARTER-team02/tree/main/src/main/java/edu/ucsb/cs156/example/controllers) 
               
-              Then, determine which example file you are going to use as a basis for your controller by reading the team02 instructions about the `@Id` field here: <https://github.com/ucsb-cs156/f23/blob/main/lab/team02.md#two-types-of-id-values-for-an-entity>
+              (2) Then, determine which example file you are going to use as a basis for your controller by reading the team02 instructions about the `@Id` field here: <https://github.com/ucsb-cs156/f23/blob/main/lab/team02.md#two-types-of-id-values-for-an-entity>
               
               The two candidates are:
               * `UCSBDatesController.java` (if your database table a numeric `@Id` field)
               * `UCSBDiningCommonsController.java` (if your database table uses a string field as it's `@Id` field)
+
+              (3) Create a file called `${{env.name}}Controller.java` in the `src/main/java/edu/ucsb/cs156/example/controllers` directory.
               
-              For this issue, you'll want to create a similar for your database table, but at this stage, include ONLY the first two Java methods, i.e. the ones with these annotations:
+              Copy over:
+              * all of the imports
+              * the top level class annotations (e.g. `@Tag`, `@RequestMapping`, `@RestController` and `@Slf4j`) adjusting them as needed
+              * the `@Autowired` declaration of the repository class for your database table; this gives you access to the database table.  The `@Autowired` declaration signals
+                the Spring boot framework to automatically invoke the constructor for this class so that you don't have to.  Using `@Autowired`
+                also allows the code to automatically switch between using a real database when running as a web app,
+                or a "mock" database when we do unit testing of the controller methods.
+
+              (4) Don't copy over all of the methods yet; just copy over these two methods with these annotations:
               
               | Annotation | Purpose |
               |-|-|
               |`@GetMapping("/all")` | Get all records in the table and return as a JSON array |
               | `@PostMapping("/post")` | Use the data in the input parameters to create a new row in the table and return the data as JSON |
               
-              Copy over these two methods, then edit the names of the fields, etc. to match your database table.
+              (5) Edit the names of the fields, etc. to match your database table.
+
+              (6) Next, use Swagger to see if your methods work.  Debug until you get correct results using Swagger.
               
+              (7) When your interactive testing works, we'll move on to creating automated tests.  Locate the directory for controller tests:
+              
+              * [`src/test/java/edu/ucsb/cs156/example/controllers`](https://github.com/ucsb-cs156-f23/STARTER-team02/tree/test/src/main/java/edu/ucsb/cs156/example/controllers)  
+
+              Find the file with tests for the controller you used as a basis for your controller file, 
+              i.e. 
+
+              * `UCSBDatesControllerTests.java` (if your database table a numeric `@Id` field)
+              * `UCSBDiningCommonsControllerTests.java` (if your database table uses a string field as it's `@Id` field)
+
+              (8) Create a new file called `${{env.name}}Controller.java` in the `src/main/java/edu/ucsb/cs156/example/controllers` directory.
+
+              (9) Copy over:
+              
+              * all of the imports
+              * the  `@WebMvcTest(...)` annotation (be sure to change the parameter here to the name of the controller test you are testing; forgetting to do so is a common source of errors)
+              * the `@Import(TestConfig.class)` annotation (this one stays exactly as it is)
+              * the `@MockBean` declaration for the repository for your new database table; this creates a "mock" (i.e. "fake") database object using a Java package called `Mockito`)
+              * the `@MockBean` declaration for the `UserRepository`; this is needed so that we can work with the mock users to test what happens in various scenarios: user not logged in, regular user logged in, admin user logged in
+              
+              (10) Copy over just the tests that pertain to the methods you defined in your controller so far, i.e. the ones under the comments:
+              * `// Tests for GET /api/ucsbdiningcommons/all`
+              * `// Tests for POST /api/ucsbdiningcommons...`
+
+              You'll see additional tests for another `GET` method, as well as `DELETE` and `PUT`; we don't want
+              those tests yet (that's a later issue).
+
+              (11) Check test coverage with `mvn test jacoco:report`; to read the report, open `target/site/jacoco/index.html` in a web browser. Iterate until you have 100% line/branch coverage.
+              
+              (12) Check test coverage with `mvn test pitest:mutationCoverage`; to read the report, open `target/pit-reports/index.html` in a web browser. Iterate until there are no surviving mutations (e.g. `>> Generated 61 mutations Killed 61 (100%)`).  You may ignore line coverage of less than 100% reported by pitest (e.g. this is fine: `>> Line Coverage: 171/175 (98%)`).
 
               # Acceptance Criteria:
 
@@ -276,8 +337,12 @@ jobs:
               - [ ] There is full mutation test coverage (Pitest) for the methods in
                 `${{env.name}}Controller.java`
 
+              # Next issue
 
-
+              Now you can complete these in any order:
+              * Add `GET` (show) endpoint for a single record in ${{env.name}} table
+              * Add `PUT` (edit) endpoint for a single record in ${{env.name}} table
+              * Add `DELETE` endpoint for a specific record in ${{env.name}} table.
 
       - name:  Add `GET` (show) endpoint for a single record in table
         uses: dacbd/create-issue-action@main
@@ -288,9 +353,23 @@ jobs:
           title: Add `GET` (show) endpoint for a single record in ${{env.name}} table
 
           body: |
-           
+
+            # Dependencies
+
+            This issue should be completed *after* the issue with the title "Create `${{env.name}}Controller`..."
+
+            # Overview
+            
+            In this issue, we add one more method from the example Controller used as a basis for our code; namely the method with the annotation shown below:
+            
+            | Annotation | Purpose |
+            |-|-|
+            |`@GetMapping("")` | Get a single record from the table; use the value passed in as a `@RequestParam` to do a lookup by id.  If a matching row is found, return the row as a JSON object, otherwise throw an `EntityNotFoundException`. |
+                       
             Add `GET` (show) endpoint for a single record in ${{env.name}} table
 
+            Also add the tests for this endpoint.
+            
             # Acceptance Criteria:
             
             - [ ] In `${{env.name}}Controller.java` there is code for an 
@@ -307,8 +386,7 @@ jobs:
             - [ ] There is full mutation test coverage (Pitest) for new code in
                   `${{env.name}}Controller.java`
             
-            
-        
+           
 
 
       - name: Add `PUT` (edit) endpoint for a single record in table
@@ -321,6 +399,22 @@ jobs:
           title: Add `PUT` (edit) endpoint for a single record in ${{env.name}} table
 
           body: |
+
+            # Dependencies
+
+            This issue should be completed *after* the issue with the title "Create `UCSBDiningCommonsMenuItemController`..."
+
+            # Overview
+            
+            In this issue, we add one more method from the example Controller used as a basis for our code; namely the method with the annotation shown below:
+            
+            | Annotation | Purpose |
+            |-|-|
+            |`@GetMapping("")` | Get a single record from the table; use the value passed in as a `@RequestParam` to do a lookup by id.  If a matching row is found, return the row as a JSON object, otherwise throw an `EntityNotFoundException`. |
+                       
+            Add `GET` (show) endpoint for a single record in ${{env.name}} table
+
+            Also add the tests for this endpoint.
 
             Add `PUT` (edit) endpoint for a single record in ${{env.name}} table
 
