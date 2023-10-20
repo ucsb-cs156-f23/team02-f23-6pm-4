@@ -178,12 +178,20 @@ jobs:
             # Acceptance Criteria:
             - [ ] An app named `team02-YOURGITHUBID-dev` is created on this team's dokku server, where
                   `YOURGITHUBID` is your github id.
-            - [ ] The app is configured for a database (see: <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html>)
-            - [ ] The app is configured for HTTPS (see: <https://ucsb-cs156.github.io/topics/dokku/enabling_https.html>)
-            - [ ] The app is configured for OAuth (see: [`docs/h2-database.md`](/ucsb-cs156-f23/STARTER-team02/blob/main/docs/h2-database.md))
-            - [ ] The `APP_ADMIN_EMAILS` are configured (see: [`docs/environment-variables.md`](/ucsb-cs156-f23/STARTER-team02/blob/main/docs/environment-variables.md))
+
+            - [ ] An database is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html>)
+            - [ ] HTTPS is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/enabling_https.html>)
+            - [ ] The ADMIN_EMAILS are configured for that app.
+                  * You should find the ones you need in a pinned post on your team's Slack channel.
+                  * Instructions for configuring the variable are here: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
+            - [ ] Google OAuth is configured for that app.
+                  * Instructions for configuring OAuth credentials are here: <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
+                  * Then you need to use the instructions here to configure the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
+            - [ ] Everyone on the team, and the instructor and TAs, 
+                  are all able to login with OAuth and see that they have
+                  admin privileges.
             - [ ] Initially, the `main` branch is deployed and works properly (later, you will deploy your own branches to this 
-                  instance as you test them before merging.)
+                  instance as you test them before merging.)           
                         
       - name: Create database table
         uses: dacbd/create-issue-action@main
