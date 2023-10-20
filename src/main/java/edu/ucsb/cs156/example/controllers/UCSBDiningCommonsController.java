@@ -39,17 +39,6 @@ public class UCSBDiningCommonsController extends ApiController {
         return commons;
     }
 
-    @Operation(summary= "Get a single commons")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("")
-    public UCSBDiningCommons getById(
-            @Parameter(name="code") @RequestParam String code) {
-        UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommons.class, code));
-
-        return commons;
-    }
-
     @Operation(summary= "Create a new commons")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
@@ -76,6 +65,17 @@ public class UCSBDiningCommonsController extends ApiController {
         UCSBDiningCommons savedCommons = ucsbDiningCommonsRepository.save(commons);
 
         return savedCommons;
+    }
+
+    @Operation(summary= "Get a single commons")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("")
+    public UCSBDiningCommons getById(
+            @Parameter(name="code") @RequestParam String code) {
+        UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommons.class, code));
+
+        return commons;
     }
 
     @Operation(summary= "Delete a UCSBDiningCommons")
