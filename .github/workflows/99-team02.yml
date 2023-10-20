@@ -211,7 +211,7 @@ jobs:
                   instructions.)
             - [ ] When you deploy the app to Dokku, you can see the table
                   using the `dokku postgres:connect team02-db` command
-                  (use `\dt` to list the tables)
+                  (use `\dt` to list the tables) (See <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html#postgres-command-line> for more info.)
           
 
       - name: Create Controller, add GET (index) and POST (create)
