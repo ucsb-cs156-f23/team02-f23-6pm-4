@@ -44,17 +44,6 @@ public class UCSBDatesController extends ApiController {
         return dates;
     }
 
-    @Operation(summary= "Get a single date")
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping("")
-    public UCSBDate getById(
-            @Parameter(name="id") @RequestParam Long id) {
-        UCSBDate ucsbDate = ucsbDateRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBDate.class, id));
-
-        return ucsbDate;
-    }
-
     @Operation(summary= "Create a new date")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
@@ -77,6 +66,17 @@ public class UCSBDatesController extends ApiController {
         UCSBDate savedUcsbDate = ucsbDateRepository.save(ucsbDate);
 
         return savedUcsbDate;
+    }
+
+    @Operation(summary= "Get a single date")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("")
+    public UCSBDate getById(
+            @Parameter(name="id") @RequestParam Long id) {
+        UCSBDate ucsbDate = ucsbDateRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBDate.class, id));
+
+        return ucsbDate;
     }
 
     @Operation(summary= "Delete a UCSBDate")
