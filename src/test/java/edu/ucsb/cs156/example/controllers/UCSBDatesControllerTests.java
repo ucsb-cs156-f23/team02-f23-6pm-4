@@ -42,8 +42,8 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
         @MockBean
         UserRepository userRepository;
 
-        // Authorization tests for /api/ucsbdates/admin/all
-
+        // Tests for GET /api/ucsbdates/all
+        
         @Test
         public void logged_out_users_cannot_get_all() throws Exception {
                 mockMvc.perform(get("/api/ucsbdates/all"))
@@ -57,14 +57,45 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                                 .andExpect(status().is(200)); // logged
         }
 
+        @WithMockUser(roles = { "USER" })
         @Test
-        public void logged_out_users_cannot_get_by_id() throws Exception {
-                mockMvc.perform(get("/api/ucsbdates?id=7"))
-                                .andExpect(status().is(403)); // logged out users can't get by id
+        public void logged_in_user_can_get_all_ucsbdates() throws Exception {
+
+                // arrange
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+
+                UCSBDate ucsbDate1 = UCSBDate.builder()
+                                .name("firstDayOfClasses")
+                                .quarterYYYYQ("20222")
+                                .localDateTime(ldt1)
+                                .build();
+
+                LocalDateTime ldt2 = LocalDateTime.parse("2022-03-11T00:00:00");
+
+                UCSBDate ucsbDate2 = UCSBDate.builder()
+                                .name("lastDayOfClasses")
+                                .quarterYYYYQ("20222")
+                                .localDateTime(ldt2)
+                                .build();
+
+                ArrayList<UCSBDate> expectedDates = new ArrayList<>();
+                expectedDates.addAll(Arrays.asList(ucsbDate1, ucsbDate2));
+
+                when(ucsbDateRepository.findAll()).thenReturn(expectedDates);
+
+                // act
+                MvcResult response = mockMvc.perform(get("/api/ucsbdates/all"))
+                                .andExpect(status().isOk()).andReturn();
+
+                // assert
+
+                verify(ucsbDateRepository, times(1)).findAll();
+                String expectedJson = mapper.writeValueAsString(expectedDates);
+                String responseString = response.getResponse().getContentAsString();
+                assertEquals(expectedJson, responseString);
         }
 
-        // Authorization tests for /api/ucsbdates/post
-        // (Perhaps should also have these for put and delete)
+        // Tests for POST /api/ucsbdates/post...
 
         @Test
         public void logged_out_users_cannot_post() throws Exception {
@@ -79,7 +110,41 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                                 .andExpect(status().is(403)); // only admins can post
         }
 
-        // // Tests with mocks for database actions
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void an_admin_user_can_post_a_new_ucsbdate() throws Exception {
+                // arrange
+
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+
+                UCSBDate ucsbDate1 = UCSBDate.builder()
+                                .name("firstDayOfClasses")
+                                .quarterYYYYQ("20222")
+                                .localDateTime(ldt1)
+                                .build();
+
+                when(ucsbDateRepository.save(eq(ucsbDate1))).thenReturn(ucsbDate1);
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                post("/api/ucsbdates/post?name=firstDayOfClasses&quarterYYYYQ=20222&localDateTime=2022-01-03T00:00:00")
+                                                .with(csrf()))
+                                .andExpect(status().isOk()).andReturn();
+
+                // assert
+                verify(ucsbDateRepository, times(1)).save(ucsbDate1);
+                String expectedJson = mapper.writeValueAsString(ucsbDate1);
+                String responseString = response.getResponse().getContentAsString();
+                assertEquals(expectedJson, responseString);
+        }
+
+        // Tests for GET /api/ucsbdates?id=...
+
+        @Test
+        public void logged_out_users_cannot_get_by_id() throws Exception {
+                mockMvc.perform(get("/api/ucsbdates?id=7"))
+                                .andExpect(status().is(403)); // logged out users can't get by id
+        }
 
         @WithMockUser(roles = { "USER" })
         @Test
@@ -128,71 +193,8 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                 assertEquals("UCSBDate with id 7 not found", json.get("message"));
         }
 
-        @WithMockUser(roles = { "USER" })
-        @Test
-        public void logged_in_user_can_get_all_ucsbdates() throws Exception {
 
-                // arrange
-                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
-
-                UCSBDate ucsbDate1 = UCSBDate.builder()
-                                .name("firstDayOfClasses")
-                                .quarterYYYYQ("20222")
-                                .localDateTime(ldt1)
-                                .build();
-
-                LocalDateTime ldt2 = LocalDateTime.parse("2022-03-11T00:00:00");
-
-                UCSBDate ucsbDate2 = UCSBDate.builder()
-                                .name("lastDayOfClasses")
-                                .quarterYYYYQ("20222")
-                                .localDateTime(ldt2)
-                                .build();
-
-                ArrayList<UCSBDate> expectedDates = new ArrayList<>();
-                expectedDates.addAll(Arrays.asList(ucsbDate1, ucsbDate2));
-
-                when(ucsbDateRepository.findAll()).thenReturn(expectedDates);
-
-                // act
-                MvcResult response = mockMvc.perform(get("/api/ucsbdates/all"))
-                                .andExpect(status().isOk()).andReturn();
-
-                // assert
-
-                verify(ucsbDateRepository, times(1)).findAll();
-                String expectedJson = mapper.writeValueAsString(expectedDates);
-                String responseString = response.getResponse().getContentAsString();
-                assertEquals(expectedJson, responseString);
-        }
-
-        @WithMockUser(roles = { "ADMIN", "USER" })
-        @Test
-        public void an_admin_user_can_post_a_new_ucsbdate() throws Exception {
-                // arrange
-
-                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
-
-                UCSBDate ucsbDate1 = UCSBDate.builder()
-                                .name("firstDayOfClasses")
-                                .quarterYYYYQ("20222")
-                                .localDateTime(ldt1)
-                                .build();
-
-                when(ucsbDateRepository.save(eq(ucsbDate1))).thenReturn(ucsbDate1);
-
-                // act
-                MvcResult response = mockMvc.perform(
-                                post("/api/ucsbdates/post?name=firstDayOfClasses&quarterYYYYQ=20222&localDateTime=2022-01-03T00:00:00")
-                                                .with(csrf()))
-                                .andExpect(status().isOk()).andReturn();
-
-                // assert
-                verify(ucsbDateRepository, times(1)).save(ucsbDate1);
-                String expectedJson = mapper.writeValueAsString(ucsbDate1);
-                String responseString = response.getResponse().getContentAsString();
-                assertEquals(expectedJson, responseString);
-        }
+        // Tests for DELETE /api/ucsbdates?id=... 
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
@@ -222,7 +224,7 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                 Map<String, Object> json = responseToJson(response);
                 assertEquals("UCSBDate with id 15 deleted", json.get("message"));
         }
-
+        
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
         public void admin_tries_to_delete_non_existant_ucsbdate_and_gets_right_error_message()
@@ -242,6 +244,8 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                 Map<String, Object> json = responseToJson(response);
                 assertEquals("UCSBDate with id 15 not found", json.get("message"));
         }
+
+        // Tests for PUT /api/ucsbdates?id=... 
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
@@ -283,6 +287,7 @@ public class UCSBDatesControllerTests extends ControllerTestCase {
                 assertEquals(requestBody, responseString);
         }
 
+        
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
         public void admin_cannot_edit_ucsbdate_that_does_not_exist() throws Exception {
