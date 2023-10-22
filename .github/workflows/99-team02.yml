@@ -292,7 +292,7 @@ jobs:
               
               (7) When your interactive testing works, we'll move on to creating automated tests.  Locate the directory for controller tests:
               
-              * [`src/test/java/edu/ucsb/cs156/example/controllers`](https://github.com/ucsb-cs156-f23/STARTER-team02/tree/test/src/main/java/edu/ucsb/cs156/example/controllers)  
+              * [`src/test/java/edu/ucsb/cs156/example/controllers`](https://github.com/ucsb-cs156-f23/STARTER-team02/tree/main/src/test/java/edu/ucsb/cs156/example/controllers)  
 
               Find the file with tests for the controller you used as a basis for your controller file, 
               i.e. 
@@ -300,9 +300,11 @@ jobs:
               * `UCSBDatesControllerTests.java` (if your database table a numeric `@Id` field)
               * `UCSBDiningCommonsControllerTests.java` (if your database table uses a string field as it's `@Id` field)
 
-              (8) Create a new file called `${{env.name}}Controller.java` in the `src/main/java/edu/ucsb/cs156/example/controllers` directory.
+              Keep this file open in one window; you'll need this as source material for the file you are about to create.
 
-              (9) Copy over:
+              (8) In a separate window, create a new file called `${{env.name}}ControllerTests.java` in the `src/test/java/edu/ucsb/cs156/example/controllers` directory.
+
+              (9) From the source file you identified in step (7) above, copy over:
               
               * all of the imports
               * the  `@WebMvcTest(...)` annotation (be sure to change the parameter here to the name of the controller test you are testing; forgetting to do so is a common source of errors)
@@ -310,7 +312,9 @@ jobs:
               * the `@MockBean` declaration for the repository for your new database table; this creates a "mock" (i.e. "fake") database object using a Java package called `Mockito`)
               * the `@MockBean` declaration for the `UserRepository`; this is needed so that we can work with the mock users to test what happens in various scenarios: user not logged in, regular user logged in, admin user logged in
               
-              (10) Copy over just the tests that pertain to the methods you defined in your controller so far, i.e. the ones under the comments:
+              Be sure to change the name of the controller class to match the one for your database table.
+
+              (10) Next, copy over just the tests that pertain to the methods you defined in your controller so far, i.e. the ones under the comments:
               * `// Tests for GET /api/ucsbdiningcommons/all`
               * `// Tests for POST /api/ucsbdiningcommons...`
 
@@ -397,9 +401,6 @@ jobs:
             - [ ] There is full mutation test coverage (Pitest) for new code in
                   `${{env.name}}Controller.java`
             
-           
-
-
       - name: Add `PUT` (edit) endpoint for a single record in table
 
         uses: dacbd/create-issue-action@main
@@ -421,22 +422,20 @@ jobs:
             
             | Annotation | Purpose |
             |-|-|
-            |`@GetMapping("")` | Get a single record from the table; use the value passed in as a `@RequestParam` to do a lookup by id.  If a matching row is found, return the row as a JSON object, otherwise throw an `EntityNotFoundException`. |
+            |`@PutMapping("")` | Get a single record from the table; use the value passed in as a `@RequestParam` to do a lookup by id.  If a matching row is found, update that row with the values passed in as a JSON object. If a matching row is not found, throw an `EntityNotFoundException`. |
                        
-            Add `GET` (show) endpoint for a single record in ${{env.name}} table
 
-            Also add the tests for this endpoint.
-
-            Add `PUT` (edit) endpoint for a single record in ${{env.name}} table
-
-            Note that it is a good idea to implement `GET` for a single item
-            first; when using `PUT` manually, it's convenient to be able to copy/paste the JSON representation of the data and then edit it in the swagger interface.
+            Note that while it isn't strictly necessary, it may be a good idea to implement `GET` for a single item
+            first; when using `PUT` manually, it's convenient to be able to copy/paste the JSON representation of the data from the
+            `GET` by id method, paste it into the swagger interface, then edit it to make the changes you want before clicking to
+            submit the request.
             
-            Eventually, it's typically the case that in order to populate an edit
-            form in the front end, you first do a `GET` on a particular item, 
-            and use that JSON to populate the fields in a form.  You can send the
-            JSON representation of the new item to the backend.
-            
+            You'll need to copy over the code for the PUT method from the example controller, 
+            and then paste those into `${{env.name}}Controller.java` and edit them to match your database table.
+        
+            Then, copy over the tests that pertain to the PUT method from the example controller,
+            paste those into `${{env.name}}ControllerTests.java` and edit them to match your database table.
+
             # Acceptance Criteria:
             
             - [ ] In `${{env.name}}Controller.java` there is code for an 
@@ -450,9 +449,7 @@ jobs:
             - [ ] There is full test coverage (Jacoco) for the new code in 
                   `${{env.name}}Controller.java`
             - [ ] There is full mutation test coverage (Pitest) for new code in
-                  `${{env.name}}Controller.java`
-            
-
+                  `${{env.name}}Controller.java`            
 
       - name: Add `DELETE` endpoint for a specific record in table
         uses: dacbd/create-issue-action@main
@@ -464,7 +461,23 @@ jobs:
 
           body: |
 
-            Add `DELETE` endpoint for a specific record in ${{env.name}} table.
+            # Dependencies
+
+            This issue should be completed *after* the issue with the title "Create `${{env.name}}Controller`..."
+
+            # Overview
+            
+            In this issue, we add one more method from the example Controller used as a basis for our code; namely the method with the annotation shown below:
+            
+            | Annotation | Purpose |
+            |-|-|
+            |`@DeleteMapping("")` | Delete a single record from the table; use the value passed in as a `@RequestParam` to do a lookup by id. If a matching row is not found, throw an `EntityNotFoundException`. |
+                   
+            You'll need to copy over the code for the DELETE method from the example controller, 
+            and then paste those into `${{env.name}}Controller.java` and edit them to match your database table.
+        
+            Then, copy over the tests that pertain to the DELETE method from the example controller,
+            paste those into `${{env.name}}ControllerTests.java` and edit them to match your database table.
 
             # Acceptance Criteria:
             
