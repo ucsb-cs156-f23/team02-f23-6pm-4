@@ -215,6 +215,17 @@ jobs:
 
             This issue should be completed *after* the issue "${{env.name}} - Create personal dokku dev deployment"
 
+            # Overview
+
+            This issue involves creating the database table for `${{env.name}}`.
+
+            For step-by-step instructions, please see these portions of the
+            lab writeup:
+
+            * <https://ucsb-cs156.github.io/f23/lab/team02.html#your-task-add-crud-for-additional-database-tables>
+            * <https://ucsb-cs156.github.io/f23/lab/team02.html#understanding-how-to-create-the-entity-class>
+            * <https://ucsb-cs156.github.io/f23/lab/team02.html#details-repository-class>
+            
             # Acceptance Criteria:
             
             - [ ] There is an `@Entity` class called ${{env.name}}.java
