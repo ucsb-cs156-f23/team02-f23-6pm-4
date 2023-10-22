@@ -23,7 +23,7 @@ following the instructions below should take care of that.
   
    As shown here:
    
-   <img width="606" alt="image" src="https://github.com/ucsb-cs156-f23/STARTER-jpa03/assets/1119017/4b762858-0b2d-42ad-a778-94680c50015a">
+   <img width="606" alt="image" src="https://github.com/ucsb-cs156-m23/STARTER-jpa03/assets/1119017/4b762858-0b2d-42ad-a778-94680c50015a">
 
    If `gh-pages` is not an option, then perform the next step where you launch workflow `02-gh-pages-rebuild` first, then try this step again.
 
