@@ -263,7 +263,7 @@ jobs:
               
               * [`src/main/java/edu/ucsb/cs156/example/controllers`](https://github.com/ucsb-cs156-f23/STARTER-team02/tree/main/src/main/java/edu/ucsb/cs156/example/controllers) 
               
-              (2) Then, determine which example file you are going to use as a basis for your controller by reading the team02 instructions about the `@Id` field here: <https://github.com/ucsb-cs156/f23/blob/main/lab/team02.md#two-types-of-id-values-for-an-entity>
+              (2) Then, determine which example file you are going to use as a basis for your controller by reading the team02 instructions about the `@Id` field here: <https://ucsb-cs156.github.io/f23/lab/team02.html#two-types-of-id-values-for-an-entity-class>
               
               The two candidates are:
               * `UCSBDatesController.java` (if your database table a numeric `@Id` field)
