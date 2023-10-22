@@ -69,9 +69,8 @@ jobs:
             - [ ] The main branch is deployed on Dokku at, for example,
                   <https://team02.dokku-xx.cs.ucsb.edu> (substituting your
                   own Dokku instances for xx).
-            - [ ] Everyone on the team, and the instructor and TAs, 
-                  are all able to login with OAuth and see that they have
-                  admin privileges.
+            - [ ] Everyone on the team, and the instructor and TAs, are all able to 
+                  login with OAuth and see that they have admin privileges.
 
             # Details
 
@@ -97,9 +96,8 @@ jobs:
             - [ ] The main branch is deployed on Dokku at, for example,
                   <https://team02-qa.dokku-xx.cs.ucsb.edu> (substituting your
                   own Dokku instances for xx).
-            - [ ] Everyone on the team, and the instructor and TAs, 
-                  are all able to login with OAuth and see that they have
-                  admin privileges.
+            - [ ] Everyone on the team, and the instructor and TAs, are all able to 
+                  login with OAuth and see that they have admin privileges.
                   
            
             # Details
@@ -193,9 +191,8 @@ jobs:
             - [ ] Google OAuth is configured for that app.
                   * Instructions for configuring OAuth credentials are here: <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
                   * Then you need to use the instructions here to configure the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
-            - [ ] Everyone on the team, and the instructor and TAs, 
-                  are all able to login with OAuth and see that they have
-                  admin privileges.
+            - [ ] Everyone on the team, and the instructor and TAs, are all able to 
+                  login with OAuth and see that they have admin privileges.
             - [ ] Initially, the `main` branch is deployed and works properly (later, you will deploy your own branches to this 
                   instance as you test them before merging.)     
             # Next issue
@@ -269,9 +266,11 @@ jobs:
               * `UCSBDatesController.java` (if your database table a numeric `@Id` field)
               * `UCSBDiningCommonsController.java` (if your database table uses a string field as it's `@Id` field)
 
-              (3) Create a file called `${{env.name}}Controller.java` in the `src/main/java/edu/ucsb/cs156/example/controllers` directory.
+              Keep this file open in one window; you'll need this as source material for the file you are about to create.
+
+              (3) In a separate window, create a new file called `${{env.name}}Controller.java` in the `src/main/java/edu/ucsb/cs156/example/controllers` directory.
               
-              Copy over:
+              From the example file, copy over:
               * all of the imports
               * the top level class annotations (e.g. `@Tag`, `@RequestMapping`, `@RestController` and `@Slf4j`) adjusting them as needed
               * the `@Autowired` declaration of the repository class for your database table; this gives you access to the database table.  The `@Autowired` declaration signals
@@ -283,7 +282,7 @@ jobs:
               
               | Annotation | Purpose |
               |-|-|
-              |`@GetMapping("/all")` | Get all records in the table and return as a JSON array |
+              | `@GetMapping("/all")`   | Get all records in the table and return as a JSON array |
               | `@PostMapping("/post")` | Use the data in the input parameters to create a new row in the table and return the data as JSON |
               
               (5) Edit the names of the fields, etc. to match your database table.
