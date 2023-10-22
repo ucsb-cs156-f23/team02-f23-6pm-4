@@ -62,9 +62,11 @@ jobs:
             - [ ] HTTPS is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/enabling_https.html>)
             - [ ] The ADMIN_EMAILS are configured for that app.
                   * You should find the ones you need in a pinned post on your team's Slack channel.
-                  * Instructions for configuring the variable are here: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
+                  * Instructions for configuring the variable are here: 
+                    <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] Google OAuth is configured for that app.
-                  * Instructions for configuring OAuth credentials are here: <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
+                  * Instructions for configuring OAuth credentials are here: 
+                    <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
                   * Then you need to use the instructions here to configure the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] The main branch is deployed on Dokku at, for example,
                   <https://team02.dokku-xx.cs.ucsb.edu> (substituting your
@@ -89,9 +91,11 @@ jobs:
             - [ ] HTTPS is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/enabling_https.html>)
             - [ ] The ADMIN_EMAILS are configured for that app.
                   * You should find the ones you need in a pinned post on your team's Slack channel.
-                  * Instructions for configuring the variable are here: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
+                  * Instructions for configuring the variable are here: 
+                    <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] Google OAuth is configured for that app.
-                  * Instructions for configuring OAuth credentials are here: <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
+                  * Instructions for configuring OAuth credentials are here: 
+                    <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
                   * Then you need to use the instructions here to configure the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] The main branch is deployed on Dokku at, for example,
                   <https://team02-qa.dokku-xx.cs.ucsb.edu> (substituting your
@@ -187,9 +191,11 @@ jobs:
             - [ ] HTTPS is configured for that app (see: <https://ucsb-cs156.github.io/topics/dokku/enabling_https.html>)
             - [ ] The ADMIN_EMAILS are configured for that app.
                   * You should find the ones you need in a pinned post on your team's Slack channel.
-                  * Instructions for configuring the variable are here: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
+                  * Instructions for configuring the variable are here: 
+                    <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] Google OAuth is configured for that app.
-                  * Instructions for configuring OAuth credentials are here: <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
+                  * Instructions for configuring OAuth credentials are here: 
+                    <https://ucsb-cs156.github.io/topics/oauth/oauth_google_setup.html>
                   * Then you need to use the instructions here to configure the environment variables `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: <https://ucsb-cs156.github.io/topics/dokku/environment_variables.html>
             - [ ] Everyone on the team, and the instructor and TAs, are all able to 
                   login with OAuth and see that they have admin privileges.
