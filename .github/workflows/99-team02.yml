@@ -222,10 +222,10 @@ jobs:
             For step-by-step instructions, please see these portions of the
             lab writeup:
 
+            * <https://ucsb-cs156.github.io/f23/lab/team02.html#the-two-database-tables-in-the-starting-code>
             * <https://ucsb-cs156.github.io/f23/lab/team02.html#your-task-add-crud-for-additional-database-tables>
-            * <https://ucsb-cs156.github.io/f23/lab/team02.html#understanding-how-to-create-the-entity-class>
-            * <https://ucsb-cs156.github.io/f23/lab/team02.html#details-repository-class>
-            
+            * <https://ucsb-cs156.github.io/f23/lab/team02.html#adding-a-database-table>  
+
             # Acceptance Criteria:
             
             - [ ] There is an `@Entity` class called ${{env.name}}.java
