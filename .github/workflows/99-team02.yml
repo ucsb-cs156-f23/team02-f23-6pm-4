@@ -145,7 +145,9 @@ jobs:
   
             - [ ] All PRs have been code reviewed and merged to main
             - [ ] All issues are in the done column 
-            - [ ] The `main` branch (after all PRs merged) has been reployed to the dokku instance with the <tt>dokku git:sync team02 <i>url</i> main</tt> and `dokku ps:rebuild team02 ` commands
+            - [ ] The `main` branch (after all PRs merged) has been reployed to the dokku instance via:
+                  <tt>dokku git:sync team02 <i>url</i> main</tt><br />
+                  <tt>dokku ps:rebuild team02</tt>
             - [ ] The assignment has been submitted on Canvas
             
             ## Details
