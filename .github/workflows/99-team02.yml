@@ -26,6 +26,9 @@ jobs:
               -f name='setup' \
               -f description='One time tasks to divide among all team members' \
               -f color='dddddd' 
+      - name: Update Label for setup
+        continue-on-error: true
+        run: |
           gh api \
               --method PATCH \
               -H "Accept: application/vnd.github+json" \
@@ -206,6 +209,12 @@ jobs:
               -f name='${{env.name}}' \
               -f description='team02 issues for ${{env.name}}' \
               -f color='${{env.name}}' 
+      - name: Update Label
+        continue-on-error: true
+        env:
+          name: ${{ matrix.api }}
+          color: ${{ fromJSON(env.LABEL_COLOR)[matrix.api] }}
+        run: |
           gh api \
               --method PATCH \
               -H "Accept: application/vnd.github+json" \
