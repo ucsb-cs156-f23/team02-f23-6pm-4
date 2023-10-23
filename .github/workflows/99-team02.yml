@@ -215,7 +215,7 @@ jobs:
               /repos/${{github.repository}}/labels \
               -f name='${{env.name}}' \
               -f description='team02 issues for ${{env.name}}' \
-              -f color='${{env.name}}' 
+              -f color='${{env.color}}' 
       - name: Create personal dokku dev deployment
         uses: dacbd/create-issue-action@main
         env:
