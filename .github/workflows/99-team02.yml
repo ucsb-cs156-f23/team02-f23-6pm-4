@@ -19,7 +19,7 @@ jobs:
               --method POST \
               -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
-              /repos/OWNER/REPO/labels \
+              /repos/${{github.repository}}/labels \
               -f name='setup' \
               -f description='One time tasks to divide among all team members' \
               -f color='eeeeee' 
