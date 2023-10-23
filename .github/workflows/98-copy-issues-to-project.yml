@@ -1,4 +1,4 @@
-name: 99 - Create Issues for team02
+name: 98 - Copy Issues to Project
 
 env:
   GH_TOKEN: ${{ github.token }}
