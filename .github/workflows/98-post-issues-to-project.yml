@@ -1,0 +1,13 @@
+name: 99 - Create Issues for team02
+
+env:
+  GH_TOKEN: ${{ github.token }}
+
+on:
+  workflow_dispatch:
+jobs:
+
+  copyIssuesToProject:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
