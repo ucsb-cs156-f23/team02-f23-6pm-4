@@ -2,6 +2,7 @@ name: 99 - Create Issues for team02
 
 env:
   ASN_LINK: https://ucsb-cs156.github.io/f23/lab/team02
+  GH_TOKEN: ${{ github.token }}
 
 on:
   workflow_dispatch:
@@ -12,7 +13,16 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      
+      - name: Create Labels
+        run: |
+          gh api \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              /repos/OWNER/REPO/labels \
+              -f name='setup' \
+              -f description='One time tasks to divide among all team members' \
+              -f color='eeeeee' 
       - name: Add table to README.md
         uses: dacbd/create-issue-action@main
         with:
