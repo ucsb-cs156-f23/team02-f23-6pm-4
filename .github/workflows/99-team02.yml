@@ -205,7 +205,20 @@ jobs:
                   instance as you test them before merging.)     
             # Next issue
 
-            Next, work on "Create database table for ${{env.name}}"
+            Next, work on 
+
+            * Drag the issue for "${{env.name}} - Create personal dokku dev deployment" directly into the "Done" column (we don't do code review on setup tasks like this one.)
+            * Locate the issue: "Create database table for ${{env.name}}" on the Kanban board.
+            * Assign that issue to yourself
+            * Drag it into the "In Progress" column.
+            * Start a new branch.  The new branch name is something like `xy-${{env.name}}-create-db`
+              <pre>
+              git fetch
+              git checkout main
+              git pull origin main
+              git checkout -b <i>your-branch-name</i>
+              </pre>
+            * Start on the next issue
                         
       - name: Create database table
         uses: dacbd/create-issue-action@main
@@ -242,9 +255,33 @@ jobs:
                   using the `dokku postgres:connect team02-db` command
                   (use `\dt` to list the tables) (See <https://ucsb-cs156.github.io/topics/dokku/postgres_database.html#postgres-command-line> for more info.)
           
-            # Next issue
+            # What to do next
 
-            Next, work on "Create `${{env.name}}Controller..."
+            When you've met all of the acceptance criteria:
+
+            ** Make a PR**: Do a PR for this branch, being sure to enter a [reasonable title](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-titles)
+            and [description](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-descriptions).
+
+            In the description, include the text "Closes #n" where `n` is the number of
+            this issue.
+
+            Then ask for a team member to review your PR.
+
+            Finally: drag this issue from "In Progress" to "In Review".
+      
+            ** Review Others' PRs**: Next, see if there are any PRs that need to be code reviewed and merged.  Unless you are the
+            first person on your team to complete a PR, there likely is at least one.
+            See: 
+            * [General Code Review Advice](https://ucsb-cs156.github.io/topics/code_reviews/)
+            * [Performin Code Reviews on Github](https://ucsb-cs156.github.io/topics/code_reviews/code_reviews_github.html)
+
+            ** Start your next issue **: Then, find the issue for 
+            "Create `${{env.name}}Controller..." on the Kanban board in the ToDo column.
+            
+            * Assign it to yourself
+            * Drag into "In Progress"
+            * Create a new branch, starting from the branch for the issue you just finished.
+            * Start on the new issue.
 
       - name: Create Controller, add GET (index) and POST (create)
         uses: dacbd/create-issue-action@main
@@ -361,10 +398,39 @@ jobs:
 
               # Next issue
 
+              # What to do next
+
+              When you've met all of the acceptance criteria:
+  
+              ** Make a PR**: Do a PR for this branch, being sure to enter a [reasonable title](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-titles)
+              and [description](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-descriptions).
+  
+              In the description, include the text "Closes #n" where `n` is the number of
+              this issue.
+  
+              Then ask for a team member to review your PR.
+  
+              Finally: drag this issue from "In Progress" to "In Review".
+        
+              ** Review Others' PRs**: Next, see if there are any PRs that need to be code reviewed and merged.  Unless you are the
+              first person on your team to complete a PR, there likely is at least one.
+              See: 
+              * [General Code Review Advice](https://ucsb-cs156.github.io/topics/code_reviews/)
+              * [Performin Code Reviews on Github](https://ucsb-cs156.github.io/topics/code_reviews/code_reviews_github.html)
+  
+              ** Start your next issue **: 
+              
               Now you can complete these in any order:
               * Add `GET` (show) endpoint for a single record in ${{env.name}} table
               * Add `PUT` (edit) endpoint for a single record in ${{env.name}} table
               * Add `DELETE` endpoint for a specific record in ${{env.name}} table.
+              
+              Find the issue you are going to work on next on the Kanban board.
+              
+              * Assign it to yourself
+              * Drag into "In Progress"
+              * Create a new branch, starting from the branch for the issue you just finished.
+              * Start on the new issue.
 
       - name:  Add `GET` (show) endpoint for a single record in table
         uses: dacbd/create-issue-action@main
@@ -407,6 +473,22 @@ jobs:
                   `${{env.name}}Controller.java`
             - [ ] There is full mutation test coverage (Pitest) for new code in
                   `${{env.name}}Controller.java`
+
+            # What to do next
+
+            Do a PR, following all of the usual steps (title, description, `Closes #n` text,
+            dragging issue to "In Review", requesting reviewers).
+
+            Check to see if any fellow team members PRs need to be reviewed.
+            
+            Then, assign yourself the next incomplete issue for your database table (`${{env.name}}`)
+
+            Follow all the usual steps (assign to self, drag to "In Progress", start new branch.)
+
+            When you are done with all issues for `${{env.name}}`, please give your full attention to 
+            helping others on your team to complete the sprint, so that the team
+            is ready to submit on Canvas by the deadline.
+            
             
       - name: Add `PUT` (edit) endpoint for a single record in table
 
@@ -456,7 +538,23 @@ jobs:
             - [ ] There is full test coverage (Jacoco) for the new code in 
                   `${{env.name}}Controller.java`
             - [ ] There is full mutation test coverage (Pitest) for new code in
-                  `${{env.name}}Controller.java`            
+                  `${{env.name}}Controller.java`   
+
+            # What to do next
+
+            Do a PR, following all of the usual steps (title, description, `Closes #n` text,
+            dragging issue to "In Review", requesting reviewers).
+
+            Check to see if any fellow team members PRs need to be reviewed.
+            
+            Then, assign yourself the next incomplete issue for your database table (`${{env.name}}`)
+
+            Follow all the usual steps (assign to self, drag to "In Progress", start new branch.)
+
+            When you are done with all issues for `${{env.name}}`, please give your full attention to 
+            helping others on your team to complete the sprint, so that the team
+            is ready to submit on Canvas by the deadline.
+            
 
       - name: Add `DELETE` endpoint for a specific record in table
         uses: dacbd/create-issue-action@main
@@ -501,6 +599,20 @@ jobs:
                   `${{env.name}}Controller.java`
             - [ ] There is full mutation test coverage (Pitest) for new code in
                   `${{env.name}}Controller.java`
+
+            # What to do next
+
+            Do a PR, following all of the usual steps (title, description, `Closes #n` text,
+            dragging issue to "In Review", requesting reviewers).
+
+            Check to see if any fellow team members PRs need to be reviewed.
             
+            Then, assign yourself the next incomplete issue for your database table (`${{env.name}}`)
+
+            Follow all the usual steps (assign to self, drag to "In Progress", start new branch.)
+
+            When you are done with all issues for `${{env.name}}`, please give your full attention to 
+            helping others on your team to complete the sprint, so that the team
+            is ready to submit on Canvas by the deadline.
             
           
