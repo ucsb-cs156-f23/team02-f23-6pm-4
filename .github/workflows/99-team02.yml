@@ -3,6 +3,8 @@ name: 99 - Create Issues for team02
 env:
   ASN_LINK: https://ucsb-cs156.github.io/f23/lab/team02
   GH_TOKEN: ${{ github.token }}
+  LABEL_COLOR: "{ \"UCSBDiningCommonsMenuItem\": \"ff0000\", \"UCSBOrganization\": \"00ff00\", \"RecommendationRequest\": \"0000ff\", \"MenuItemReview\": \"ff00ff\", \"HelpRequest\": \"ffff00\", \"Articles\": \"00ffff\" }"
+
 
 on:
   workflow_dispatch:
@@ -13,7 +15,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      - name: Create Labels
+      - name: Create Label for setup
         run: |
           gh api \
               --method POST \
@@ -22,7 +24,7 @@ jobs:
               /repos/${{github.repository}}/labels \
               -f name='setup' \
               -f description='One time tasks to divide among all team members' \
-              -f color='eeeeee' 
+              -f color='dddddd' 
       - name: Add table to README.md
         uses: dacbd/create-issue-action@main
         with:
@@ -181,7 +183,19 @@ jobs:
     steps:
     
       - uses: actions/checkout@v3
-
+      - name: Create Label
+        env:
+          name: ${{ matrix.api }}
+          color: ${{ fromJSON(env.LABEL_COLOR)[matrix.api] }}
+        run: |
+          gh api \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              /repos/${{github.repository}}/labels \
+              -f name='${{env.name}}' \
+              -f description='team02 issues for ${{env.name}}' \
+              -f color='${{env.name}}' 
       - name: Create personal dokku dev deployment
         uses: dacbd/create-issue-action@main
         env:
@@ -277,7 +291,7 @@ jobs:
 
             When you've met all of the acceptance criteria:
 
-            ** Make a PR**: Do a PR for this branch, being sure to enter a [reasonable title](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-titles)
+            **Make a PR**: Do a PR for this branch, being sure to enter a [reasonable title](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-titles)
             and [description](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-descriptions).
 
             In the description, include the text "Closes #n" where `n` is the number of
@@ -287,13 +301,13 @@ jobs:
 
             Finally: drag this issue from "In Progress" to "In Review".
       
-            ** Review Others' PRs**: Next, see if there are any PRs that need to be code reviewed and merged.  Unless you are the
+            **Review Others' PRs**: Next, see if there are any PRs that need to be code reviewed and merged.  Unless you are the
             first person on your team to complete a PR, there likely is at least one.
             See: 
             * [General Code Review Advice](https://ucsb-cs156.github.io/topics/code_reviews/)
             * [Performin Code Reviews on Github](https://ucsb-cs156.github.io/topics/code_reviews/code_reviews_github.html)
 
-            ** Start your next issue **: Then, find the issue for 
+            **Start your next issue **: Then, find the issue for 
             "Create `${{env.name}}Controller..." on the Kanban board in the ToDo column.
             
             * Assign it to yourself
@@ -420,7 +434,7 @@ jobs:
 
               When you've met all of the acceptance criteria:
   
-              ** Make a PR**: Do a PR for this branch, being sure to enter a [reasonable title](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-titles)
+              **Make a PR**: Do a PR for this branch, being sure to enter a [reasonable title](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-titles)
               and [description](https://ucsb-cs156.github.io/topics/pull_requests.html#pr-descriptions).
   
               In the description, include the text "Closes #n" where `n` is the number of
@@ -430,13 +444,13 @@ jobs:
   
               Finally: drag this issue from "In Progress" to "In Review".
         
-              ** Review Others' PRs**: Next, see if there are any PRs that need to be code reviewed and merged.  Unless you are the
+              **Review Others' PRs**: Next, see if there are any PRs that need to be code reviewed and merged.  Unless you are the
               first person on your team to complete a PR, there likely is at least one.
               See: 
               * [General Code Review Advice](https://ucsb-cs156.github.io/topics/code_reviews/)
               * [Performin Code Reviews on Github](https://ucsb-cs156.github.io/topics/code_reviews/code_reviews_github.html)
   
-              ** Start your next issue **: 
+              **Start your next issue **: 
               
               Now you can complete these in any order:
               * Add `GET` (show) endpoint for a single record in ${{env.name}} table
