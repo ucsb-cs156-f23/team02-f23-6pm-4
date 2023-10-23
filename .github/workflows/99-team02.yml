@@ -18,6 +18,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Add table to README.md
+          labels: "setup"
           body: |
             # Acceptance Criteria:
             - [ ] The README.md has a table at the top like the one shown below
@@ -40,6 +41,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Set up Github Pages
+          labels: "setup"
           body: |
             # Acceptance Criteria:
             - [ ] Github Pages is active, using the `gh-pages` branch and the root directory
@@ -55,6 +57,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Set up Team prod deployment
+          labels: "setup"
           body: |
             # Acceptance Criteria:
             - [ ] An app named `team02` is created on this team's dokku server.
@@ -83,6 +86,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Set up Team qa deployment
+          labels: "setup"
           body: |
             # Acceptance Criteria:
 
@@ -119,6 +123,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Adjust title and links in README.md
+          labels: "setup"
           body: |
             ## Acceptance criteria
             - [ ] The title of the README.md file is changed from `STARTER-team02` to the name of the app (e.g. `team02-f23-6pm-4`)
@@ -135,6 +140,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title:  Submit for Grading
+          labels: "setup"
           body: |
 
             This issue should be the very *last* one that the team drags into the "done" column;
@@ -173,6 +179,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: "${{env.name}} - Create personal dokku dev deployment"
+          labels: "${{env.name}}"
           body: |
 
             # Dependencies
@@ -227,6 +234,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Create database table for ${{env.name}}
+          labels: "${{env.name}}"
           body: |
 
             # Dependencies
@@ -290,7 +298,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Create `${{env.name}}Controller`, add `GET` (index) and `POST` (create)
-
+          labels: "${{env.name}}"
           body: |
 
               # Dependencies
@@ -439,7 +447,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Add `GET` (show) endpoint for a single record in ${{env.name}} table
-
+          labels: "${{env.name}}"
           body: |
 
             # Dependencies
@@ -498,7 +506,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Add `PUT` (edit) endpoint for a single record in ${{env.name}} table
-
+          labels: "${{env.name}}"
           body: |
 
             # Dependencies
@@ -563,7 +571,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Add `DELETE` endpoint for a specific record in ${{env.name}} table.
-
+          labels: "${{env.name}}"
           body: |
 
             # Dependencies
