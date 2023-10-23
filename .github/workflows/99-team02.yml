@@ -33,8 +33,8 @@ jobs:
               --method PATCH \
               -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
-              /repos/${{github.repository}}/labels \
-              -f name='setup' \
+              /repos/${{github.repository}}/labels/setup \
+              -f new_name='setup' \
               -f description='One time tasks to divide among all team members' \
               -f color='dddddd' 
       - name: Add table to README.md
@@ -219,8 +219,8 @@ jobs:
               --method PATCH \
               -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
-              /repos/${{github.repository}}/labels \
-              -f name='${{env.name}}' \
+              /repos/${{github.repository}}/labels/${{env.name}} \
+              -f new_name='${{env.name}}' \
               -f description='team02 issues for ${{env.name}}' \
               -f color='${{env.name}}' 
       - name: Create personal dokku dev deployment
