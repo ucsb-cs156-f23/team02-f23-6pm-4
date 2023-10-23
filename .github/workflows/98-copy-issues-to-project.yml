@@ -3,11 +3,21 @@ name: 98 - Copy Issues to Project
 env:
   GH_TOKEN: ${{ github.token }}
 
+
+
 on:
   workflow_dispatch:
+   inputs:
+      project:
+        type: number
+        description: number of project
 jobs:
 
   copyIssuesToProject:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Echo project number
+        run: |
+          echo "Project ${{inputs.project}}"
+      
