@@ -106,7 +106,7 @@ jobs:
     - name: a-javadoc Download artifact
       uses: dawidd6/action-download-artifact@v2.27.0
       with:
-        workflow: 02-gh-pages-rebuild-part-1.yml
+        workflow: 02-gh-pages-rebuild-part-1-backend.yml
         github_token: ${{secrets.GITHUB_TOKEN}}
         name: javadoc
         path: ${{env.javadoc_dest }}
@@ -129,7 +129,7 @@ jobs:
     - name: c-jacoco Download artifact
       uses: dawidd6/action-download-artifact@v2.27.0
       with:
-        workflow: 02-gh-pages-rebuild-part-1.yml
+        workflow: 02-gh-pages-rebuild-part-1-backend.yml
         github_token: ${{secrets.GITHUB_TOKEN}}
         name: jacoco
         path: ${{ env.jacoco_dest }}
@@ -150,7 +150,7 @@ jobs:
     - name:  d-pitest Download artifact
       uses: dawidd6/action-download-artifact@v2.27.0
       with:
-        workflow: 02-gh-pages-rebuild-part-1.yml
+        workflow: 02-gh-pages-rebuild-part-1-backend.yml
         github_token: ${{secrets.GITHUB_TOKEN}}
         name: pitest
         path: ${{ env.pitest_dest }}
@@ -188,7 +188,7 @@ jobs:
     - name: a-javadoc Download artifact
       uses: dawidd6/action-download-artifact@v2.27.0
       with:
-        workflow: 02-gh-pages-rebuild-part-1.yml
+        workflow: 02-gh-pages-rebuild-part-1-backend.yml
         github_token: ${{secrets.GITHUB_TOKEN}}
         name: prs-${{ matrix.value.number }}-javadoc
         path: ${{ env.javadoc_dest }}
@@ -210,7 +210,7 @@ jobs:
     - name:  c-jacoco Download artifact
       uses: dawidd6/action-download-artifact@v2.27.0
       with:
-        workflow: 02-gh-pages-rebuild-part-1.yml
+        workflow: 02-gh-pages-rebuild-part-1-backend.yml
         github_token: ${{secrets.GITHUB_TOKEN}}
         name: prs-${{ matrix.value.number }}-jacoco
         path: ${{ env.jacoco_dest }}
@@ -231,7 +231,7 @@ jobs:
     - name: d-pitest Download artifact
       uses: dawidd6/action-download-artifact@v2.27.0
       with:
-        workflow: 02-gh-pages-rebuild-part-1.yml
+        workflow: 02-gh-pages-rebuild-part-1-backend.yml
         github_token: ${{secrets.GITHUB_TOKEN}}
         name: prs-${{ matrix.value.number }}-pitest
         path: ${{ env.pitest_dest }}
