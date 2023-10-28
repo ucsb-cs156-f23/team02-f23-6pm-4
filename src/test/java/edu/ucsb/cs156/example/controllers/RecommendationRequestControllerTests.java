@@ -161,7 +161,7 @@ public class RecommendationRequestControllerTests extends ControllerTestCase{
                 RecommendationRequest recommendationRequest = RecommendationRequest.builder()
                                 .requesterEmail("student4@email.com")
                                 .professorEmail("professor4@email.com")
-                                .explaination("letter4request")
+                                .explanation("letter4request")
                                 .dateRequested(ldt)
                                 .dateNeeded(ldt)
                                 .done(true)
