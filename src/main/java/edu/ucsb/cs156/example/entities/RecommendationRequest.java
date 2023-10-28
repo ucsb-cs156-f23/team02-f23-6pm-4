@@ -23,7 +23,7 @@ public class RecommendationRequest {
   private long id;
   private String requesterEmail;
   private String professorEmail;
-  private String explaination;
+  private String explanation;
   private LocalDateTime dateRequested;
   private LocalDateTime dateNeeded;
   private boolean done;
