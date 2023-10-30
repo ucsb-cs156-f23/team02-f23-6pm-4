@@ -27,7 +27,7 @@ import javax.validation.Valid;
 
 import java.time.LocalDateTime;
 
-@Tag(name = "MenuItemreviews")
+@Tag(name = "MenuItemReviews")
 @RequestMapping("/api/menuitemreviews")
 @RestController
 @Slf4j
