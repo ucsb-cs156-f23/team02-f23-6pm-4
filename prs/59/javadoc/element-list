@@ -1,0 +1,9 @@
+edu.ucsb.cs156.example
+edu.ucsb.cs156.example.aop
+edu.ucsb.cs156.example.config
+edu.ucsb.cs156.example.controllers
+edu.ucsb.cs156.example.entities
+edu.ucsb.cs156.example.errors
+edu.ucsb.cs156.example.models
+edu.ucsb.cs156.example.repositories
+edu.ucsb.cs156.example.services
