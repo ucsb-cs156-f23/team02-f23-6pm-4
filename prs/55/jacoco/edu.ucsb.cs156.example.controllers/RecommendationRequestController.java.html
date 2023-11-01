@@ -31,7 +31,7 @@ import java.time.LocalDateTime;
 @RequestMapping(&quot;/api/recommendationrequests&quot;)
 @RestController
 <span class="fc" id="L33">@Slf4j</span>
-<span class="fc" id="L34">public class RecommendationRequestController {</span>
+<span class="fc" id="L34">public class RecommendationRequestController extends ApiController{</span>
     @Autowired
     RecommendationRequestRepository recommendationRequestRepository;
 
@@ -49,7 +49,7 @@ import java.time.LocalDateTime;
     public RecommendationRequest postRecommendationRequest(
             @Parameter(name=&quot;requesterEmail&quot;) @RequestParam String requesterEmail,
             @Parameter(name=&quot;professorEmail&quot;) @RequestParam String professorEmail,
-            @Parameter(name=&quot;explaination&quot;) @RequestParam String explaination,
+            @Parameter(name=&quot;explanation&quot;) @RequestParam String explanation,
             @Parameter(name=&quot;dateRequested&quot;, description=&quot;in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601&quot;) @RequestParam(&quot;dateRequested&quot;) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateRequested,
             @Parameter(name=&quot;dateNeeded&quot;, description=&quot;in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601&quot;) @RequestParam(&quot;dateNeeded&quot;) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateNeeded,
             @Parameter(name=&quot;done&quot;) @RequestParam boolean done)
@@ -64,7 +64,7 @@ import java.time.LocalDateTime;
 <span class="fc" id="L64">        RecommendationRequest recommendationRequest = new RecommendationRequest();</span>
 <span class="fc" id="L65">        recommendationRequest.setRequesterEmail(requesterEmail);</span>
 <span class="fc" id="L66">        recommendationRequest.setProfessorEmail(professorEmail);</span>
-<span class="fc" id="L67">        recommendationRequest.setExplaination(explaination);</span>
+<span class="fc" id="L67">        recommendationRequest.setExplanation(explanation);</span>
 <span class="fc" id="L68">        recommendationRequest.setDateRequested(dateRequested);</span>
 <span class="fc" id="L69">        recommendationRequest.setDateNeeded(dateNeeded);</span>
 <span class="fc" id="L70">        recommendationRequest.setDone(done);</span>
