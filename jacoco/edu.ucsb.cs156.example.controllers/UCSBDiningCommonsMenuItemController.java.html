@@ -71,5 +71,17 @@ import javax.validation.Valid;
 
 <span class="fc" id="L72">        return menuItem;</span>
     }
+
+    @Operation(summary= &quot;Delete a menu item&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @DeleteMapping(&quot;&quot;)
+    public Object deleteUCSBDiningCommonsMenuItem(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L80">        UCSBDiningCommonsMenuItem menuItem = ucsbDiningCommonsMenuItemRepository.findById(id)</span>
+<span class="fc" id="L81">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBDiningCommonsMenuItem.class, id));</span>
+
+<span class="fc" id="L83">        ucsbDiningCommonsMenuItemRepository.delete(menuItem);</span>
+<span class="fc" id="L84">        return genericMessage(&quot;UCSBDiningCommonsMenuItem with id %s deleted&quot;.formatted(id));</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
