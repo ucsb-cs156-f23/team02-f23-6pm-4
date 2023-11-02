@@ -74,5 +74,40 @@ import java.time.LocalDateTime;
 <span class="fc" id="L74">        return savedHelpRequest;</span>
     }  
 
+
+    @Operation(summary= &quot;Get a single help request&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;&quot;)
+    public HelpRequest getById(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L83">        HelpRequest helpRequest = helpRequestRepository.findById(id)</span>
+<span class="fc" id="L84">                .orElseThrow(() -&gt; new EntityNotFoundException(HelpRequest.class, id));</span>
+
+<span class="fc" id="L86">        return helpRequest;</span>
+    }
+
+
+    @Operation(summary= &quot;Update a single help request&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @PutMapping(&quot;&quot;)
+    public HelpRequest updateHelpRequest(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id,
+            @RequestBody @Valid HelpRequest incoming) {
+
+<span class="fc" id="L97">        HelpRequest helpRequest = helpRequestRepository.findById(id)</span>
+<span class="fc" id="L98">                .orElseThrow(() -&gt; new EntityNotFoundException(HelpRequest.class, id));</span>
+
+<span class="fc" id="L100">        helpRequest.setRequesterEmail(incoming.getRequesterEmail());</span>
+<span class="fc" id="L101">        helpRequest.setTeamId(incoming.getTeamId());</span>
+<span class="fc" id="L102">        helpRequest.setTableOrBreakoutRoom(incoming.getTableOrBreakoutRoom());</span>
+<span class="fc" id="L103">        helpRequest.setRequestTime(incoming.getRequestTime());</span>
+<span class="fc" id="L104">        helpRequest.setExplanation(incoming.getExplanation());</span>
+<span class="fc" id="L105">        helpRequest.setSolved(incoming.getSolved());</span>
+
+<span class="fc" id="L107">        helpRequestRepository.save(helpRequest);</span>
+
+<span class="fc" id="L109">        return helpRequest;</span>
+    }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
