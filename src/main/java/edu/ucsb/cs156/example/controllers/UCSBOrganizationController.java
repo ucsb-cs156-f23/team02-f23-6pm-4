@@ -94,7 +94,7 @@ public class UCSBOrganizationController extends ApiController {
             ucsbOrganizationRepository.save(org);
         
             return org;
-            }
+            } 
 
 
 }

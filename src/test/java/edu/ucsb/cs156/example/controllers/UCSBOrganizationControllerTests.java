@@ -263,6 +263,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 verify(ucsbOrganizationRepository, times(1)).findById("null");
                 Map<String, Object> json = responseToJson(response);
                 assertEquals("UCSBOrganization with id null not found", json.get("message"));
+                 
 
         }
 
