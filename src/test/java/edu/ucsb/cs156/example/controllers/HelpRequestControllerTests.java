@@ -292,7 +292,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         }
 
 
-        // Tests for DELETE /api/ucsbdates?id=... 
+        // Tests for DELETE /api/helprequests?id=... 
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
