@@ -7,7 +7,7 @@ team02,edu.ucsb.cs156.example.controllers,UserInfoController,0,6,0,0,0,2,0,2,0,2
 team02,edu.ucsb.cs156.example.controllers,ApiController,0,24,0,0,0,7,0,5,0,5
 team02,edu.ucsb.cs156.example.controllers,MenuItemReviewCotroller,0,133,0,0,0,29,0,10,0,10
 team02,edu.ucsb.cs156.example.controllers,UCSBDiningCommonsController,0,141,0,0,0,31,0,10,0,10
-team02,edu.ucsb.cs156.example.controllers,RecommendationRequestController,0,68,0,0,0,18,0,6,0,6
+team02,edu.ucsb.cs156.example.controllers,RecommendationRequestController,0,114,0,0,0,28,0,8,0,8
 team02,edu.ucsb.cs156.example.controllers,SystemInfoController,0,7,0,0,0,2,0,2,0,2
 team02,edu.ucsb.cs156.example.controllers,HelpRequestController,0,140,0,0,0,31,0,10,0,10
 team02,edu.ucsb.cs156.example.controllers,UsersController,0,16,0,0,0,4,0,2,0,2
