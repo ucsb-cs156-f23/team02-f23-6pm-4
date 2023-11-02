@@ -109,5 +109,17 @@ import java.time.LocalDateTime;
 <span class="fc" id="L109">        return helpRequest;</span>
     }
 
+
+    @Operation(summary= &quot;Delete a help request&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @DeleteMapping(&quot;&quot;)
+    public Object deleteHelpRequest(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L118">        HelpRequest helpRequest = helpRequestRepository.findById(id)</span>
+<span class="fc" id="L119">                .orElseThrow(() -&gt; new EntityNotFoundException(HelpRequest.class, id));</span>
+
+<span class="fc" id="L121">        helpRequestRepository.delete(helpRequest);</span>
+<span class="fc" id="L122">        return genericMessage(&quot;HelpRequest with id %s deleted&quot;.formatted(id));</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
