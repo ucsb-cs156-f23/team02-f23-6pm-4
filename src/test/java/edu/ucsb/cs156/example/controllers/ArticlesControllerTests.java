@@ -40,6 +40,8 @@ public class ArticlesControllerTests extends ControllerTestCase {
         @MockBean
         ArticlesRepository articlesRepository;
 
+        @MockBean
+        UserRepository userRepository;
         // Tests for GET /api/articles/all
 
         @Test
@@ -120,7 +122,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 Articles article1 = Articles.builder()
-                                .title("title1")
+                                .title("article1")
                                 .url("newyorktimes.com/article1")
                                 .explanation("this is an example")
                                 .email("author@nytimes.com")
@@ -128,10 +130,10 @@ public class ArticlesControllerTests extends ControllerTestCase {
                                 .build();
 
                 when(articlesRepository.save(eq(article1))).thenReturn(article1);
-
+               String urlTemplate = String.format("/api/articles/post?title=%s&url=%s&explanation=%s&email=%s&dateAdded=%s", "article1", "newyorktimes.com/article1", "this is an example", "author@nytimes.com", "2022-01-03T00:00:00");
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/articles/post?title=article1&url=newyorktimes.com%2Farticle1&explanation=this%20is%20an%20example&email=author%40nytimes.com&dateAdded=2022-01-03T00%3A00%3A00")
+                                post(urlTemplate)
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
