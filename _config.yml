@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f23/team02-f23-6pm-4
 owner: ucsb-cs156-f23
 repo_name: team02-f23-6pm-4
-pull_requests: [{"author":{"id":"MDQ6VXNlcjkwNjczMzc2","is_bot":false,"login":"dayvidwang","name":""},"headRefName":"dayvidwang-Articles-get","number":77,"title":"GET endpoint to fetch a single article from Articles","url":"https://github.com/ucsb-cs156-f23/team02-f23-6pm-4/pull/77"}]
+pull_requests: []
