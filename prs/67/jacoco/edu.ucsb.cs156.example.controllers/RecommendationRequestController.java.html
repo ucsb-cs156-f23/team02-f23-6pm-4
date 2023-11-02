@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecommendationRequestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">team02</a> &gt; <a href="index.source.html" class="el_package">edu.ucsb.cs156.example.controllers</a> &gt; <span class="el_source">RecommendationRequestController.java</span></div><h1>RecommendationRequestController.java</h1><pre class="source lang-java linenums">package edu.ucsb.cs156.example.controllers;
+
+import edu.ucsb.cs156.example.entities.RecommendationRequest;
+import edu.ucsb.cs156.example.errors.EntityNotFoundException;
+import edu.ucsb.cs156.example.repositories.RecommendationRequestRepository;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+
+import java.time.LocalDateTime;
+
+@Tag(name = &quot;RecommendationRequests&quot;)
+@RequestMapping(&quot;/api/recommendationrequests&quot;)
+@RestController
+<span class="fc" id="L33">@Slf4j</span>
+<span class="fc" id="L34">public class RecommendationRequestController extends ApiController{</span>
+    @Autowired
+    RecommendationRequestRepository recommendationRequestRepository;
+
+    @Operation(summary= &quot;List all recommendation requests&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
+    @GetMapping(&quot;/all&quot;)
+    public Iterable&lt;RecommendationRequest&gt; allRecommendationRequests() {
+<span class="fc" id="L42">        Iterable&lt;RecommendationRequest&gt; recommendations = recommendationRequestRepository.findAll();</span>
+<span class="fc" id="L43">        return recommendations;</span>
+    }
+
+    @Operation(summary= &quot;Create a new recommendation request&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @PostMapping(&quot;/post&quot;)
+    public RecommendationRequest postRecommendationRequest(
+            @Parameter(name=&quot;requesterEmail&quot;) @RequestParam String requesterEmail,
+            @Parameter(name=&quot;professorEmail&quot;) @RequestParam String professorEmail,
+            @Parameter(name=&quot;explanation&quot;) @RequestParam String explanation,
+            @Parameter(name=&quot;dateRequested&quot;, description=&quot;in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601&quot;) @RequestParam(&quot;dateRequested&quot;) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateRequested,
+            @Parameter(name=&quot;dateNeeded&quot;, description=&quot;in iso format, e.g. YYYY-mm-ddTHH:MM:SS; see https://en.wikipedia.org/wiki/ISO_8601&quot;) @RequestParam(&quot;dateNeeded&quot;) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateNeeded,
+            @Parameter(name=&quot;done&quot;) @RequestParam boolean done)
+            throws JsonProcessingException {
+
+        // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+        // See: https://www.baeldung.com/spring-date-parameters
+
+<span class="fc" id="L61">        log.info(&quot;dateRequested={}&quot;, dateRequested);</span>
+<span class="fc" id="L62">        log.info(&quot;dateNeeded={}&quot;, dateNeeded);</span>
+
+<span class="fc" id="L64">        RecommendationRequest recommendationRequest = new RecommendationRequest();</span>
+<span class="fc" id="L65">        recommendationRequest.setRequesterEmail(requesterEmail);</span>
+<span class="fc" id="L66">        recommendationRequest.setProfessorEmail(professorEmail);</span>
+<span class="fc" id="L67">        recommendationRequest.setExplanation(explanation);</span>
+<span class="fc" id="L68">        recommendationRequest.setDateRequested(dateRequested);</span>
+<span class="fc" id="L69">        recommendationRequest.setDateNeeded(dateNeeded);</span>
+<span class="fc" id="L70">        recommendationRequest.setDone(done);</span>
+
+<span class="fc" id="L72">        RecommendationRequest savedRecommendationRequest = recommendationRequestRepository.save(recommendationRequest);</span>
+
+<span class="fc" id="L74">        return savedRecommendationRequest;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
